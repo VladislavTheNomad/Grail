@@ -188,7 +188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 98a428cd60b085c43849d83144ff5703, type: 2}
-  enemyUI: {fileID: 0}
 --- !u!1 &7608526471264560970
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,8 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: This enemy never know about fatigue. It will inflict more and more phys.
     damage to you then longer fight will continue.
-  frequencyToDOEffect: 3
-  enemyStats: {fileID: 4258207566574927973}
+  frequencyToDoEffect: 3
 --- !u!114 &6685704636193156384
 MonoBehaviour:
   m_ObjectHideFlags: 0
