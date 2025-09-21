@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
@@ -9,11 +10,22 @@ namespace Grail
         [SerializeField] private SmithData objectProperties;
 
         private TileData thisTileData;
+        private DialogueManager dialogueManager;
+        private PlayerStats playerStats;
+        private PlayerInventory playerInventory;
+
+        [Inject]
+        public void Construct(DialogueManager dm, PlayerStats ps, PlayerInventory pi)
+        {
+            dialogueManager = dm;
+            playerStats = ps;
+            playerInventory = pi;
+        }
 
         public void ActivateObject(TileData tileData)
         {
             thisTileData = tileData;
-            DialogueManager.instance.ShowDialogue(firstFrame);
+            dialogueManager.ShowDialogue(firstFrame);
         }
 
         public void TryPurchase()
@@ -21,22 +33,22 @@ namespace Grail
             int give = objectProperties.CostInGold;
             int take = objectProperties.MightBonus;
 
-            if (PlayerInventory.Instance.CurrentGold >= objectProperties.CostInGold)
+            if (playerInventory.CurrentGold >= objectProperties.CostInGold)
             {
-                PlayerInventory.Instance.AddResource(-(objectProperties.CostInGold), Resource.Gold);
-                PlayerStats.Instance.AddStat(objectProperties.MightBonus, Stats.Might);
+                playerInventory.AddResource(-(objectProperties.CostInGold), Resource.Gold);
+                playerStats.AddStat(objectProperties.MightBonus, Stats.Might);
                 CloseDialogue();
                 thisTileData.DeactivateObject();
             }
             else if (rejection != null)
             {
-                DialogueManager.instance.ShowDialogue(rejection);
+                dialogueManager.ShowDialogue(rejection);
             }
         }
 
         public void CloseDialogue()
         {
-            DialogueManager.instance.HideDialogue();
+            dialogueManager.HideDialogue();
         }
     }
 }

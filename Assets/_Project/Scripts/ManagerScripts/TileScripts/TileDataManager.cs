@@ -1,14 +1,22 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Zenject;
 
 namespace Grail
 {
     public class TileDataManager : MonoBehaviour, IInitializable
     {
         [SerializeField] private Tilemap tilemap;
-        [SerializeField] private TileGridConstructor tileGridConstructor;
         [SerializeField] private int widthOfMap;
         [SerializeField] private int heightOfMap;
+
+        private TileGridConstructor tileGridConstructor;
+
+        [Inject]
+        public void Construct(TileGridConstructor tgc)
+        {
+            tileGridConstructor = tgc;
+        }
 
         public TileData[,] TileGrid { get; private set; }
 

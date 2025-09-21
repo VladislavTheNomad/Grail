@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
@@ -18,39 +19,53 @@ namespace Grail
         [SerializeField] private TextMeshProUGUI physDefText;
         [SerializeField] private TextMeshProUGUI magicDefText;
 
+        private BattleManager battleManager;
+        private TurnsManager turnsManager;
+        private PlayerInventory playerInventory;
+        private PlayerStats playerStats;
+
+        [Inject]
+        public void Construct(BattleManager bm, TurnsManager tm, PlayerInventory pi, PlayerStats ps)
+        {
+            battleManager = bm;
+            turnsManager = tm;
+            playerInventory = pi;
+            playerStats = ps;
+        }
+
         private void OnDestroy()
         {
-            if (TurnsManager.Instance != null)
+            if (turnsManager != null)
             {
-                TurnsManager.Instance.OnTurnsChanged -= TurnsUpdateUI;
-                TurnsManager.Instance.OnGameOver -= GameOverUI;
+                turnsManager.OnTurnsChanged -= TurnsUpdateUI;
+                turnsManager.OnGameOver -= GameOverUI;
             }
 
-            if (BattleManager.Instance != null)
+            if (battleManager != null)
             {
-                BattleManager.Instance.OnPlayerDeath -= GameOverUI;
+                battleManager.OnPlayerDeath -= GameOverUI;
             }
 
-            if (PlayerInventory.Instance != null)
+            if (playerInventory != null)
             {
-                PlayerInventory.Instance.OnResourceChanged -= ResourceUpdateUI;
+                playerInventory.OnResourceChanged -= ResourceUpdateUI;
             }
 
-            if (PlayerStats.Instance != null)
-            { 
-                PlayerStats.Instance.OnStatsChanged -= StatsUpdateUI;
+            if (playerStats != null)
+            {
+                playerStats.OnStatsChanged -= StatsUpdateUI;
             }
         }
 
         public void Initialize()
         {
-            TurnsManager.Instance.OnTurnsChanged += TurnsUpdateUI;
-            TurnsManager.Instance.OnGameOver += GameOverUI;
+            turnsManager.OnTurnsChanged += TurnsUpdateUI;
+            turnsManager.OnGameOver += GameOverUI;
 
-            BattleManager.Instance.OnPlayerDeath += GameOverUI;
+            battleManager.OnPlayerDeath += GameOverUI;
 
-            PlayerInventory.Instance.OnResourceChanged += ResourceUpdateUI;
-            PlayerStats.Instance.OnStatsChanged += StatsUpdateUI;
+            playerInventory.OnResourceChanged += ResourceUpdateUI;
+            playerStats.OnStatsChanged += StatsUpdateUI;
 
             TurnsUpdateUI();
             ResourceUpdateUI(Resource.Gold);
@@ -61,7 +76,7 @@ namespace Grail
 
         private void TurnsUpdateUI()
         {
-            turnsText.text = $"Ходов: {TurnsManager.Instance.GetCurrentTurns()} / {TurnsManager.Instance.GetMaxTurns()}";
+            turnsText.text = $"Ходов: {turnsManager.GetCurrentTurns()} / {turnsManager.GetMaxTurns()}";
         }
 
         private void ResourceUpdateUI(Resource resource)
@@ -69,10 +84,10 @@ namespace Grail
             switch (resource)
             {
                 case Resource.Gold:
-                    goldText.text = $"Gold: {PlayerInventory.Instance.CurrentGold}";
+                    goldText.text = $"Gold: {playerInventory.CurrentGold}";
                     break;
                 case Resource.Crystals:
-                    crystalText.text = $"Crystals: {PlayerInventory.Instance.CurrentCrystals}";
+                    crystalText.text = $"Crystals: {playerInventory.CurrentCrystals}";
                     break;
                 default:
                     break;
@@ -81,12 +96,12 @@ namespace Grail
 
         private void StatsUpdateUI()
         {
-            hpText.text = $"HP: {PlayerStats.Instance.Hp}";
-            manaText.text = $"Mana: {PlayerStats.Instance.Mana}";
-            mightText.text = $"Might: {PlayerStats.Instance.Might}";
-            magicText.text = $"Magic: {PlayerStats.Instance.Magic}";
-            physDefText.text = $"Phys. Def.: {(int)(PlayerStats.Instance.PhysicalDefence * 100)}%";
-            magicDefText.text = $"Magic Def.: {(int)(PlayerStats.Instance.MagicalDefence * 100)}%";
+            hpText.text = $"HP: {playerStats.Hp}";
+            manaText.text = $"Mana: {playerStats.Mana}";
+            mightText.text = $"Might: {playerStats.Might}";
+            magicText.text = $"Magic: {playerStats.Magic}";
+            physDefText.text = $"Phys. Def.: {(int)(playerStats.PhysicalDefence * 100)}%";
+            magicDefText.text = $"Magic Def.: {(int)(playerStats.MagicalDefence * 100)}%";
         }
 
         private void GameOverUI()

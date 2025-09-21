@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
@@ -20,30 +21,41 @@ namespace Grail
         [SerializeField] private DonkeyOnRoadData objectProperties;
 
         private TileData thisTileData;
+        private DialogueManager dialogueManager;
+        private TurnsManager turnsManager;
+        private PlayerInventory playerInventory;
+
+        [Inject]
+        public void Construct(DialogueManager dm, TurnsManager tm, PlayerInventory pi)
+        {
+            dialogueManager = dm;
+            turnsManager = tm;
+            playerInventory = pi;
+        }
 
         public void ActivateObject(TileData tileData)
         {
             thisTileData = tileData;
-            DialogueManager.instance.ShowDialogue(firstFrame);
+            dialogueManager.ShowDialogue(firstFrame);
             thisTileData.DeactivateObject();
         }
 
         public void DoHelp()
         {
-            TurnsManager.Instance.AddTurns(Random.Range(objectProperties.SpentTurnsMin, objectProperties.SpentTurnsMax+1));
-            DialogueManager.instance.ShowDialogue(helpBrench);
+            turnsManager.AddTurns(Random.Range(objectProperties.SpentTurnsMin, objectProperties.SpentTurnsMax+1));
+            dialogueManager.ShowDialogue(helpBrench);
         }
 
         public void GiveMoney()
         {
-            if (PlayerInventory.Instance.CurrentGold >= objectProperties.GiveGold)
+            if (playerInventory.CurrentGold >= objectProperties.GiveGold)
             {
-                PlayerInventory.Instance.AddResource(-objectProperties.GiveGold, Resource.Gold);
-                DialogueManager.instance.ShowDialogue(giveMoneyBrench);
+                playerInventory.AddResource(-objectProperties.GiveGold, Resource.Gold);
+                dialogueManager.ShowDialogue(giveMoneyBrench);
             }
             else
             {
-                DialogueManager.instance.ShowDialogue(giveMoneyBrench_Rejection);
+                dialogueManager.ShowDialogue(giveMoneyBrench_Rejection);
             }
         }
 
@@ -53,12 +65,12 @@ namespace Grail
 
             if (dice == 0)
             {
-                DialogueManager.instance.ShowDialogue(helpBrenchResult_Minus);
+                dialogueManager.ShowDialogue(helpBrenchResult_Minus);
                 //no reward
             }
             else
             {
-                DialogueManager.instance.ShowDialogue(helpBrenchResult_Plus);
+                dialogueManager.ShowDialogue(helpBrenchResult_Plus);
                 Debug.Log("тут реализовать передачу случайного артефакта");
             }  
         }
@@ -69,19 +81,19 @@ namespace Grail
 
             if (dice == 0)
             {
-                DialogueManager.instance.ShowDialogue(giveMoneyBrench_ResultMinus);
+                dialogueManager.ShowDialogue(giveMoneyBrench_ResultMinus);
                 //no reward
             }
             else
             {
-                PlayerInventory.Instance.AddResource(objectProperties.GetCrystals, Resource.Crystals);
-                DialogueManager.instance.ShowDialogue(giveMoneyBrench_ResultPlus);
+                playerInventory.AddResource(objectProperties.GetCrystals, Resource.Crystals);
+                dialogueManager.ShowDialogue(giveMoneyBrench_ResultPlus);
             }
         }
 
         public void CloseDialogue()
         {
-            DialogueManager.instance.HideDialogue();
+            dialogueManager.HideDialogue();
         }
     }
 }

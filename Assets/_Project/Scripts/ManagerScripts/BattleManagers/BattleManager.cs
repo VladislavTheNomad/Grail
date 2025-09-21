@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
@@ -23,7 +24,7 @@ namespace Grail
     }
 
 
-    public class BattleManager : MonoBehaviour, IInitializable
+    public class BattleManager : IInitializable
     {
 
         private const int MIGHT_DAMAGE_MODIFICATOR = 2;
@@ -32,29 +33,25 @@ namespace Grail
         public event Action OnPlayerWon;
 
         private Enemy enemy;
-
         private int playerMinDamage;
         private int playerMaxDamage;
-
         private int enemyMinDamage;
         private int enemyMaxDamage;
 
         private List<Statuses> playerStatuses;
         private List<Statuses> enemyStatuses;
-
         private BattleMods playMode;
 
-        public static BattleManager Instance { get; private set; }
+        private PlayerStats playerStats;
+
+        [Inject]
+        public void Construct(PlayerStats ps)
+        {
+            playerStats = ps;
+        }
 
         public void Initialize()
         {
-            if(Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-            }
-
-            Instance = this;
-
             playerStatuses = new List<Statuses>();
             enemyStatuses = new List<Statuses>();
         }
@@ -109,7 +106,7 @@ namespace Grail
         {
             playMode = mode;
 
-            while (enemy.Hp > 0 && PlayerStats.Instance.Hp > 0)
+            while (enemy.Hp > 0 && playerStats.Hp > 0)
             {
                 PlayerTurn();
 
@@ -128,9 +125,8 @@ namespace Grail
                     switch (status)
                     {
                         case Statuses.Poison:
-                            float inflictPoisonDmg = PlayerStats.Instance.Hp * 0.95f;
-                            PlayerStats.Instance.SetStat(inflictPoisonDmg, Stats.Hp);
-                            Debug.Log("ßÄ!!" + inflictPoisonDmg);
+                            float inflictPoisonDmg = playerStats.Hp * 0.95f;
+                            playerStats.SetStat(inflictPoisonDmg, Stats.Hp);
                             break;
                         case Statuses.Ignite:
                             break;
@@ -140,7 +136,7 @@ namespace Grail
                 }
             }
 
-            if (PlayerStats.Instance.Hp <= 0)
+            if (playerStats.Hp <= 0)
             {
                 OnPlayerDeath?.Invoke();
             }
@@ -180,8 +176,8 @@ namespace Grail
             switch (side)
             {
                 case Sides.Player:
-                    minDamage = (int)PlayerStats.Instance.Might / MIGHT_DAMAGE_MODIFICATOR;
-                    maxDamage = (int)PlayerStats.Instance.Might * MIGHT_DAMAGE_MODIFICATOR;
+                    minDamage = (int)playerStats.Might / MIGHT_DAMAGE_MODIFICATOR;
+                    maxDamage = (int)playerStats.Might * MIGHT_DAMAGE_MODIFICATOR;
                     break;
                 case Sides.Enemy:
                     minDamage = enemy.Might / MIGHT_DAMAGE_MODIFICATOR;
@@ -205,8 +201,8 @@ namespace Grail
                     enemy.TakeDamage(doDamage);
                     break;
                 case Sides.Enemy:
-                    doDamage = UnityEngine.Random.Range(enemyMinDamage, enemyMaxDamage + 1) * (1 - PlayerStats.Instance.PhysicalDefence);
-                    PlayerStats.Instance.TakeDamage(doDamage);
+                    doDamage = UnityEngine.Random.Range(enemyMinDamage, enemyMaxDamage + 1) * (1 - playerStats.PhysicalDefence);
+                    playerStats.TakeDamage(doDamage);
                     break;
                 default:
                     break;

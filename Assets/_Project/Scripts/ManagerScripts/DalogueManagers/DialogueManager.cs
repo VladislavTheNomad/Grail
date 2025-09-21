@@ -3,31 +3,27 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Grail
 {
-    public class DialogueManager : MonoBehaviour, IInitializable
+    public class DialogueManager : MonoBehaviour
     {
-        public static DialogueManager instance;
-
         [SerializeField] private GameObject dialogueUI;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private List<DialogueOption> options;
 
-        public void Initialize()
+        private GameStateManager gameState;
+
+        [Inject]
+        public void Construct(GameStateManager gsm)
         {
-            if(instance != null && instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            
-            instance = this;
+            gameState = gsm;
         }
 
         public void ShowDialogue(DialogueData dialogueData)
         {
-            GameStateManager.instance.StopInputSystem();
+            gameState.StopInputSystem();
             dialogueUI.SetActive(true);
 
             descriptionText.text = dialogueData.GetDescription();
@@ -59,7 +55,7 @@ namespace Grail
             {
                 option.GetButton().onClick.RemoveAllListeners();
             }
-            GameStateManager.instance.PlayInputSystem();
+            gameState.PlayInputSystem();
         }
 
         private void SetupButton(Button button, TextMeshProUGUI buttonLabel, string text, UnityEvent buttonAction)

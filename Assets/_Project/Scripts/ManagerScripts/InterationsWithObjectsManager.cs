@@ -1,10 +1,17 @@
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
-    public class InterationsWithObjectsManager : MonoBehaviour
+    public class InterationsWithObjectsManager
     {
-        [SerializeField] private TileDataManager tileDataManager;
+        private TileDataManager tileDataManager;
+
+        [Inject]
+        public void Construct(TileDataManager tdm)
+        {
+            tileDataManager = tdm;
+        }
 
         public void CheckObjectsOnTile(Vector3Int tilePosition)
         {

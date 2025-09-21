@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
@@ -11,33 +12,36 @@ namespace Grail
         [SerializeField] private TextMeshProUGUI playerStatsText;
         [SerializeField] private TextMeshProUGUI enemyStatsText;
         [SerializeField] private List<DialogueOption> options;
-        [SerializeField] private PlayerController playerController;
 
         private Enemy enemy;
+        private BattleManager battleManager;
+        private GameStateManager gameStateManager;
+        private PlayerStats playerStats;
+        private PlayerController playerController;
 
-        public static BattleUI Instance { get; private set; }
-
-        public void OnDisable()
+        [Inject]
+        public void Construct(BattleManager bm, GameStateManager gsm, PlayerStats ps, PlayerController pc)
         {
-            BattleManager.Instance.OnPlayerWon -= ShowWinInfo;
+            battleManager = bm;
+            gameStateManager = gsm;
+            playerStats = ps;
+            playerController = pc;
+        }
+
+        public void OnDestroy()
+        {
+            battleManager.OnPlayerWon -= ShowWinInfo;
         }
 
         public void Initialize()
         {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-            }
-
-            Instance = this;
-
-            BattleManager.Instance.OnPlayerWon += ShowWinInfo;
+            battleManager.OnPlayerWon += ShowWinInfo;
         }
 
         public void ShowInfoUI(Enemy importedEnemy)
         {
             enemy = importedEnemy;
-            GameStateManager.instance.StopInputSystem();
+            gameStateManager.StopInputSystem();
             beforeBattleUI.SetActive(true);
 
             enemyStatsText.text =
@@ -58,19 +62,19 @@ namespace Grail
             playerStatsText.text =
                 $"Player\n" +
                 $"\n" +
-                $"HP: {PlayerStats.Instance.Hp}\n" +
-                $"Mana: {PlayerStats.Instance.Mana}\n" +
-                $"Might: {PlayerStats.Instance.Might}\n" +
-                $"Magic: {PlayerStats.Instance.Magic}\n" +
-                $"Physical Def: {PlayerStats.Instance.PhysicalDefence * 100:F0}%\n" +
-                $"Magical Def: {PlayerStats.Instance.MagicalDefence * 100:F0}%\n";
+                $"HP: {playerStats.Hp}\n" +
+                $"Mana: {playerStats.Mana}\n" +
+                $"Might: {playerStats.Might}\n" +
+                $"Magic: {playerStats.Magic}\n" +
+                $"Physical Def: {playerStats.PhysicalDefence * 100:F0}%\n" +
+                $"Magical Def: {playerStats.MagicalDefence * 100:F0}%\n";
         }
 
         public void Retreat()
         {
             playerController.ReturnOnPreviousTile();
             beforeBattleUI.SetActive(false);
-            GameStateManager.instance.PlayInputSystem();
+            gameStateManager.PlayInputSystem();
         }
 
         public void DoBattleWithMight()

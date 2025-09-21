@@ -1,22 +1,33 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 using UnityEngine.Tilemaps;
+using System.Threading.Tasks;
+using Zenject;
 
 namespace Grail
 {
-    public class PlayerController : MonoBehaviour, IInitializable
+    public class PlayerController : IInitializable
     {
-        [SerializeField] private TileDataManager tileDataManager;
-        [SerializeField] private InterationsWithObjectsManager interactManager;
-        [SerializeField] private GameObject playerObject;
+        private const float DELAY_BETWEEN_TURNS = 0.3f;
 
         private Vector3Int playerCellPosition;
         private Vector3Int previousPlayerCellPosition;
         private PlayerInputSystem inputActions;
         private bool isInputDelayed;
-        private WaitForSeconds pauseTime;
-        private float pauseTimeDelay;
+
+        private TurnsManager turnsManager;
+        private TileDataManager tileDataManager;
+        private InterationsWithObjectsManager interactManager;
+        private GameObject playerObject;
+
+        [Inject]
+        public void Construct(TurnsManager tm, TileDataManager tdm, InterationsWithObjectsManager iwom, GameObject player)
+        {
+            turnsManager = tm;
+            tileDataManager= tdm;
+            interactManager = iwom;
+            playerObject = player;
+        }
 
         public void Initialize()
         {
@@ -26,8 +37,6 @@ namespace Grail
 
             Tilemap tilemap = tileDataManager.GetTileMap();
             playerCellPosition = tilemap.WorldToCell(playerObject.transform.position);
-
-            pauseTime = new WaitForSeconds(pauseTimeDelay);
         }
 
         public void SubscribeOnMoveInput()
@@ -50,8 +59,7 @@ namespace Grail
         {
             if (isInputDelayed) return;
 
-            isInputDelayed = true;
-            StartCoroutine(WaitBetweenTurns());
+            WaitBetweenTurns();
             Vector2 directionRaw = context.ReadValue<Vector2>();
             Vector2Int direction = GetMovementDirectionFromInput(directionRaw);
 
@@ -71,7 +79,7 @@ namespace Grail
         {
             Vector3 worldPosition = tileDataManager.GetTileWorldPosition(playerCellPosition);
             playerObject.transform.position = worldPosition;
-            TurnsManager.Instance.AddTurns(tileDataManager.CheckMoveCost(targetPosition));
+            turnsManager.AddTurns(tileDataManager.CheckMoveCost(targetPosition));
             interactManager.CheckObjectsOnTile(playerCellPosition);
         }
 
@@ -90,9 +98,10 @@ namespace Grail
                 return Vector2Int.zero;
             }
         }
-        private IEnumerator WaitBetweenTurns()
+        private async void WaitBetweenTurns()
         {
-            yield return pauseTime;
+            isInputDelayed = true;
+            await Task.Delay((int)(1000 * DELAY_BETWEEN_TURNS));
             isInputDelayed = false;
         }
     }

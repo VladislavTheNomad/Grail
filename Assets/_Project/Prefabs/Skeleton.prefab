@@ -313,4 +313,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01c1ec340bb3c8478af8dd43d1149c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  info: 
   effectChance: 1

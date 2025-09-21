@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
@@ -9,26 +10,17 @@ namespace Grail
         Crystals,
     }
 
-    public class PlayerInventory : MonoBehaviour, IInitializable
+    public class PlayerInventory : IInitializable
     {
         public event Action<Resource> OnResourceChanged;
 
-        public static PlayerInventory Instance { get; private set; }
         public int CurrentGold { get; private set; }
         public int CurrentCrystals { get; private set; }
 
         public void Initialize()
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-
-            Instance.CurrentGold = 0;
-            Instance.CurrentCrystals = 1;
+            CurrentGold = 0;
+            CurrentCrystals = 1;
 
             OnResourceChanged?.Invoke(Resource.Gold);
             OnResourceChanged?.Invoke(Resource.Crystals);

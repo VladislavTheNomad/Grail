@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
@@ -16,6 +17,15 @@ namespace Grail
         public List<IEnemyBattleEffect> ActiveBattleEffects { get; set; }
 
         private TileData tileData;
+        private BattleUI battleUI;
+        private BattleManager battleManager;
+
+        [Inject]
+        public void Construct(BattleUI bu, BattleManager bm)
+        {
+            battleUI = bu;
+            battleManager = bm;
+        }
 
         public void SetTileData(TileData tiledata)
         {
@@ -34,7 +44,7 @@ namespace Grail
             PhysicalDefence = Stats.PhysicalDefence;
             MagicalDefence = Stats.MagicalDefence;
 
-            BattleUI.Instance.ShowInfoUI(this);
+            battleUI.ShowInfoUI(this);
         }
 
         public void RemoveEnemy()
@@ -44,7 +54,7 @@ namespace Grail
 
         public void StartBattle(BattleMods mode)
         {
-            BattleManager.Instance.PrepareForBattle(this, mode);
+            battleManager.PrepareForBattle(this, mode);
         }
 
         public void TakeDamage(float dmg)

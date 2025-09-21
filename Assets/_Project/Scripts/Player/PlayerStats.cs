@@ -1,5 +1,5 @@
 using System;
-using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
@@ -16,7 +16,7 @@ namespace Grail
         AttackSpeed,
     }
 
-    public class PlayerStats : MonoBehaviour, IInitializable
+    public class PlayerStats : IInitializable
     {
         public event Action OnStatsChanged;
 
@@ -30,8 +30,6 @@ namespace Grail
         public float MagicalDefence { get; private set; }
         public float AttackSpeed { get; private set; }
 
-        public static PlayerStats Instance { get; private set; }
-
         public void Initialize()
         {
             Hp = 100;
@@ -41,15 +39,6 @@ namespace Grail
             PhysicalDefence = 0f;
             MagicalDefence = 0f;
             AttackSpeed = 2f;
-
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
         }
 
         public void AddStat(float num, Stats stat)

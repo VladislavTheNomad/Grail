@@ -1,23 +1,27 @@
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
-    public class Poison : MonoBehaviour, IEnemyBattleEffect
+    public class Poison : Effect, IEnemyBattleEffect
     {
         [SerializeField, Range(0, 1)] float effectChance;
-        
+
+        private BattleManager battleManager;
+
+        [Inject]
+        public void Construct(BattleManager bm)
+        {
+            battleManager = bm;
+        }
+
         public void DoEnemyBattleEffect()
         {
             float roll = Random.value;
             if(roll <= effectChance)
             {
-                BattleManager.Instance.SetStatus(Statuses.Poison, Sides.Player);
+                battleManager.SetStatus(Statuses.Poison, Sides.Player);
             }
-        }
-
-        public string GetInfoAboutEffect()
-        {
-            return null;
         }
     }
 }

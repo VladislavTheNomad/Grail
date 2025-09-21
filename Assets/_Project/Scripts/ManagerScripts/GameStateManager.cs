@@ -1,31 +1,26 @@
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
-    public class GameStateManager : MonoBehaviour, IInitializable
+    public class GameStateManager
     {
-        public static GameStateManager instance;
+        private PlayerController playerController;
 
-        [SerializeField] private PlayerController controller;
-
-        public void Initialize()
+        [Inject]
+        public void Construct(PlayerController pc)
         {
-            if (instance != null && instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            instance = this;
+            playerController = pc;
         }
 
         public void StopInputSystem()
         {
-            controller.UnsubscribeOnMoveInput();
+            playerController.UnsubscribeOnMoveInput();
         }
 
         public void PlayInputSystem()
         {
-            controller.SubscribeOnMoveInput();
+            playerController.SubscribeOnMoveInput();
         }
     }
 }

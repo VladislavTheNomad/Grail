@@ -3,7 +3,7 @@ using UnityEngine.Tilemaps;
 
 namespace Grail
 {
-    public class TileGridConstructor : MonoBehaviour
+    public class TileGridConstructor
     {
         private int width;
         private int height;

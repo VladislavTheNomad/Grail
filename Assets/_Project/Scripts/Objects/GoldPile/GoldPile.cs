@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
@@ -6,9 +7,17 @@ namespace Grail
     {
         [SerializeField] private GoldPileData objectProperties;
 
+        private PlayerInventory inventory;
+
+        [Inject]
+        public void Construct(PlayerInventory pi)
+        {
+            inventory = pi;
+        }
+
         public void ActivateObject(TileData tileData)
         {
-            PlayerInventory.Instance.AddResource(Random.Range(objectProperties.MinGoldFromPile, objectProperties.MaxGoldFromPile), Resource.Gold);
+            inventory.AddResource(Random.Range(objectProperties.MinGoldFromPile, objectProperties.MaxGoldFromPile), Resource.Gold);
             tileData.RemoveFromMap();
         }
     }
