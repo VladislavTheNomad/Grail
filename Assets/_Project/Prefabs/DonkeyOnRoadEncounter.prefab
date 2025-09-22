@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3319721219334777652}
-  - component: {fileID: 7382901795962530865}
   m_Layer: 0
   m_Name: Help
   m_TagString: Untagged
@@ -34,44 +33,6 @@ Transform:
   - {fileID: 955732792221434690}
   m_Father: {fileID: 7950006208327216819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7382901795962530865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278480767012206734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abf72077f89372845b8830fa0826a16e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  descriptionText: "\u0412\u044B \u0432\u044B\u0442\u0430\u0441\u043A\u0438\u0432\u0430\u0435\u0442\u0435
-    \u043E\u0441\u043B\u0430 \u0438\u0437 \u043A\u0430\u043D\u0430\u0432\u044B. \u0423\u043F\u0440\u044F\u043C\u043E\u0435
-    \u0436\u0438\u0432\u043E\u0442\u043D\u043E\u0435 \u043E\u043A\u0430\u0437\u0430\u043B\u043E\u0441\u044C
-    \u0437\u0430\u043C\u0435\u0442\u043D\u043E \u0442\u044F\u0436\u0435\u043B\u0435\u0435,
-    \u0447\u0435\u043C \u0432\u044B \u043F\u0440\u0435\u0434\u043F\u043E\u043B\u0430\u0433\u0430\u043B\u0438,
-    \u0438 \u043F\u043E\u0442\u043E\u043C\u0443 \u043F\u043E\u0442\u0435\u0440\u044F\u043B\u0438
-    \u043F\u043E\u0440\u044F\u0434\u043E\u0447\u043D\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438,
-    \u043D\u043E \u0432\u0441\u0435 \u0436\u0435 \u0432\u0430\u043C \u0443\u0434\u0430\u043B\u043E\u0441\u044C
-    \u043F\u043E\u043C\u043E\u0447\u044C \u043A\u0440\u0435\u0441\u0442\u044C\u044F\u043D\u0438\u043D\u0443."
-  buttonsTexts:
-  - "\u041E\u041A"
-  buttonActions:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4132807348697693769}
-        m_TargetAssemblyTypeName: Grail.DonkeyOnRoad, Assembly-CSharp
-        m_MethodName: DoHelpReward
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1574839705467995353
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,8 +77,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf72077f89372845b8830fa0826a16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptionText: "\u0421\u0445\u0432\u0430\u0442\u0438\u0432 \u043E\u043E\u0441\u043B\u0430
-    \u043F\u043E\u0434 \u0443\u0437\u0434\u0446\u044B, \u043A\u0440\u0435\u0441\u0442\u044C\u044F\u043D\u0438\u043D
+  descriptionText: "\u0412\u044B \u0432\u044B\u0442\u0430\u0441\u043A\u0438\u0432\u0430\u0435\u0442\u0435
+    \u043E\u0441\u043B\u0430 \u0438\u0437 \u043A\u0430\u043D\u0430\u0432\u044B. \u0423\u043F\u0440\u044F\u043C\u043E\u0435
+    \u0436\u0438\u0432\u043E\u0442\u043D\u043E\u0435 \u043E\u043A\u0430\u0437\u0430\u043B\u043E\u0441\u044C
+    \u0437\u0430\u043C\u0435\u0442\u043D\u043E \u0442\u044F\u0436\u0435\u043B\u0435\u0435,
+    \u0447\u0435\u043C \u0432\u044B \u043F\u0440\u0435\u0434\u043F\u043E\u043B\u0430\u0433\u0430\u043B\u0438,
+    \u0438 \u043F\u043E\u0442\u043E\u043C\u0443 \u043F\u043E\u0442\u0435\u0440\u044F\u043B\u0438
+    \u043F\u043E\u0440\u044F\u0434\u043E\u0447\u043D\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438,
+    \u043D\u043E \u0432\u0441\u0435 \u0436\u0435 \u0432\u0430\u043C \u0443\u0434\u0430\u043B\u043E\u0441\u044C
+    \u043F\u043E\u043C\u043E\u0447\u044C \u043A\u0440\u0435\u0441\u0442\u044C\u044F\u043D\u0438\u043D\u0443.
+    \u0421\u0445\u0432\u0430\u0442\u0438\u0432 \u043E\u043E\u0441\u043B\u0430 \u043F\u043E\u0434
+    \u0443\u0437\u0434\u0446\u044B, \u043A\u0440\u0435\u0441\u0442\u044C\u044F\u043D\u0438\u043D
     \u0431\u044B\u0441\u0442\u0440\u043E \u0437\u0430\u0441\u0435\u043C\u0435\u043D\u0438\u043B
     \u043F\u0440\u043E\u0447\u044C, \u043F\u043E\u043A\u0430 \u0432\u044B \u0432\u044B\u0431\u0438\u0440\u0430\u043B\u0438\u0441\u044C
     \u0438\u0437 \u044F\u043C\u044B, \u043F\u043E\u043A\u0440\u044B\u0442\u044B\u0435
@@ -128,19 +98,7 @@ MonoBehaviour:
   - "\u041E\u043A"
   buttonActions:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4132807348697693769}
-        m_TargetAssemblyTypeName: Grail.DonkeyOnRoad, Assembly-CSharp
-        m_MethodName: CloseDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1744374097829907538
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,24 +143,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf72077f89372845b8830fa0826a16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptionText: "\u0421\u043F\u0430\u0441\u0438\u0431\u043A\u0438, \u044F \u043F\u043E\u0448\u0435\u043B!"
+  descriptionText: "\u041A\u0440\u0435\u0441\u0442\u044C\u044F\u043D\u0438\u043D
+    \u0441\u043C\u043E\u0442\u0440\u0438\u0442, \u043A\u0430\u043A \u0435\u0433\u043E
+    \u043B\u0430\u0434\u043E\u043D\u0438 \u043D\u0430\u043F\u043E\u043B\u043D\u044F\u044E\u0442\u0441\u044F
+    \u0437\u043E\u043B\u043E\u0442\u043E\u043C: \"\u0421\u043F\u0430\u0441\u0438\u0431\u043E
+    \u0432\u0430\u043C, \u0449\u0435\u0434\u0440\u044B\u0439 \u0433\u043E\u0441\u043F\u043E\u0434\u0438\u043D!\".
+    \"\u0421\u043F\u0430\u0441\u0438\u0431\u043A\u0438, \u044F \u043F\u043E\u0448\u0435\u043B!\""
   buttonsTexts:
   - "\u041E\u041A"
   buttonActions:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4132807348697693769}
-        m_TargetAssemblyTypeName: Grail.DonkeyOnRoad, Assembly-CSharp
-        m_MethodName: CloseDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3584888014386009659
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +163,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7708175559722858107}
-  - component: {fileID: 1550666891871613770}
   m_Layer: 0
   m_Name: GiveMoney
   m_TagString: Untagged
@@ -238,40 +188,6 @@ Transform:
   - {fileID: 4893155447446694436}
   m_Father: {fileID: 7950006208327216819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1550666891871613770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3584888014386009659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abf72077f89372845b8830fa0826a16e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  descriptionText: "\u041A\u0440\u0435\u0441\u0442\u044C\u044F\u043D\u0438\u043D
-    \u0441\u043C\u043E\u0442\u0440\u0438\u0442, \u043A\u0430\u043A \u0435\u0433\u043E
-    \u043B\u0430\u0434\u043E\u043D\u0438 \u043D\u0430\u043F\u043E\u043B\u043D\u044F\u044E\u0442\u0441\u044F
-    \u0437\u043E\u043B\u043E\u0442\u043E\u043C: \"\u0421\u043F\u0430\u0441\u0438\u0431\u043E
-    \u0432\u0430\u043C, \u0449\u0435\u0434\u0440\u044B\u0439 \u0433\u043E\u0441\u043F\u043E\u0434\u0438\u043D!\"\""
-  buttonsTexts:
-  - "\u041E\u041A"
-  buttonActions:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4132807348697693769}
-        m_TargetAssemblyTypeName: Grail.DonkeyOnRoad, Assembly-CSharp
-        m_MethodName: GiveMoneyReward
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &3825380167377570258
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,27 +232,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf72077f89372845b8830fa0826a16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptionText: "\u0412\u043E\u0442 \u0432\u043E\u0437\u044C\u043C\u0438\u0442\u0435
-    \u044D\u0442\u043E\u0442 \u043A\u0430\u043C\u0435\u043D\u044C! \u041A\u0430\u0436\u0435\u0442\u0441\u044F,
+  descriptionText: "\u041A\u0440\u0435\u0441\u0442\u044C\u044F\u043D\u0438\u043D
+    \u0441\u043C\u043E\u0442\u0440\u0438\u0442, \u043A\u0430\u043A \u0435\u0433\u043E
+    \u043B\u0430\u0434\u043E\u043D\u0438 \u043D\u0430\u043F\u043E\u043B\u043D\u044F\u044E\u0442\u0441\u044F
+    \u0437\u043E\u043B\u043E\u0442\u043E\u043C: \"\u0421\u043F\u0430\u0441\u0438\u0431\u043E
+    \u0432\u0430\u043C, \u0449\u0435\u0434\u0440\u044B\u0439 \u0433\u043E\u0441\u043F\u043E\u0434\u0438\u043D!\".
+    \"\u0412\u043E\u0442 \u0432\u043E\u0437\u044C\u043C\u0438\u0442\u0435 \u044D\u0442\u043E\u0442
+    \u043A\u0430\u043C\u0435\u043D\u044C! \u041A\u0430\u0436\u0435\u0442\u0441\u044F,
     \u043E\u043D \u0432\u043E\u043B\u0448\u0435\u0431\u043D\u044B\u0439?\" (\u0412\u044B
     \u043F\u043E\u043B\u0443\u0447\u0430\u0435\u0442\u0435 1 \u043A\u0440\u0438\u0441\u0442\u0430\u043B)"
   buttonsTexts:
   - "\u041E\u0442\u043B\u0438\u0447\u043D\u043E!"
   buttonActions:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4132807348697693769}
-        m_TargetAssemblyTypeName: Grail.DonkeyOnRoad, Assembly-CSharp
-        m_MethodName: CloseDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3826835396894431024
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,8 +272,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3826835396894431024}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.457, y: 1.432, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.78, y: -2.6328535, z: -0.0047092615}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -439,10 +348,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstFrame: {fileID: 5274581453304544346}
-  helpBrench: {fileID: 7382901795962530865}
   helpBrenchResult_Plus: {fileID: 2548785253772404390}
   helpBrenchResult_Minus: {fileID: 1615825814771806312}
-  giveMoneyBrench: {fileID: 1550666891871613770}
   giveMoneyBrench_ResultPlus: {fileID: 7912009115161293919}
   giveMoneyBrench_ResultMinus: {fileID: 8110007138701613685}
   giveMoneyBrench_Rejection: {fileID: 1744774685538241004}
@@ -498,19 +405,7 @@ MonoBehaviour:
   - "\u041E\u043A"
   buttonActions:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4132807348697693769}
-        m_TargetAssemblyTypeName: Grail.DonkeyOnRoad, Assembly-CSharp
-        m_MethodName: CloseDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5344377573446410002
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,31 +450,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf72077f89372845b8830fa0826a16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptionText: "\u041A\u0440\u0435\u0441\u0442\u044C\u044F\u043D\u0438\u043D
-    \u0434\u043E\u0441\u0442\u0430\u0435\u0442 \u0438\u0437 \u043E\u0434\u043D\u043E\u0439
-    \u0438\u0437 \u0441\u0443\u043C\u043E\u043A, \u043A\u043E\u0442\u043E\u0440\u044B\u043C\u0438
-    \u0431\u044B\u043B \u043D\u0430\u0432\u044C\u044E\u0447\u0435\u043D \u0443\u0441\u0442\u0430\u0432\u0448\u0438\u0439
-    \u043F\u043E\u0441\u0435\u043B, \u043D\u0435\u043A\u0438\u0439 \u043F\u0440\u0435\u0434\u043C\u0435\u0442.
-    \"\u0412\u043E\u0442, \u0432\u043E\u0437\u044C\u043C\u0438\u0442\u0435 \u044D\u0442\u0443
-    \u0432\u0435\u0449\u044C, \u043E\u043D\u0430 \u043F\u043E\u043C\u043E\u0436\u0435\u0442
-    \u0432\u0430\u043C \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u0438!\""
+  descriptionText: "\u0412\u044B \u0432\u044B\u0442\u0430\u0441\u043A\u0438\u0432\u0430\u0435\u0442\u0435
+    \u043E\u0441\u043B\u0430 \u0438\u0437 \u043A\u0430\u043D\u0430\u0432\u044B. \u0423\u043F\u0440\u044F\u043C\u043E\u0435
+    \u0436\u0438\u0432\u043E\u0442\u043D\u043E\u0435 \u043E\u043A\u0430\u0437\u0430\u043B\u043E\u0441\u044C
+    \u0437\u0430\u043C\u0435\u0442\u043D\u043E \u0442\u044F\u0436\u0435\u043B\u0435\u0435,
+    \u0447\u0435\u043C \u0432\u044B \u043F\u0440\u0435\u0434\u043F\u043E\u043B\u0430\u0433\u0430\u043B\u0438,
+    \u0438 \u043F\u043E\u0442\u043E\u043C\u0443 \u043F\u043E\u0442\u0435\u0440\u044F\u043B\u0438
+    \u043F\u043E\u0440\u044F\u0434\u043E\u0447\u043D\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438,
+    \u043D\u043E \u0432\u0441\u0435 \u0436\u0435 \u0432\u0430\u043C \u0443\u0434\u0430\u043B\u043E\u0441\u044C
+    \u043F\u043E\u043C\u043E\u0447\u044C \u043A\u0440\u0435\u0441\u0442\u044C\u044F\u043D\u0438\u043D\u0443.
+    \u041A\u0440\u0435\u0441\u0442\u044C\u044F\u043D\u0438\u043D \u0434\u043E\u0441\u0442\u0430\u0435\u0442
+    \u0438\u0437 \u043E\u0434\u043D\u043E\u0439 \u0438\u0437 \u0441\u0443\u043C\u043E\u043A,
+    \u043A\u043E\u0442\u043E\u0440\u044B\u043C\u0438 \u0431\u044B\u043B \u043D\u0430\u0432\u044C\u044E\u0447\u0435\u043D
+    \u0443\u0441\u0442\u0430\u0432\u0448\u0438\u0439 \u043F\u043E\u0441\u0435\u043B,
+    \u043D\u0435\u043A\u0438\u0439 \u043F\u0440\u0435\u0434\u043C\u0435\u0442. \"\u0412\u043E\u0442,
+    \u0432\u043E\u0437\u044C\u043C\u0438\u0442\u0435 \u044D\u0442\u0443 \u0432\u0435\u0449\u044C,
+    \u043E\u043D\u0430 \u043F\u043E\u043C\u043E\u0436\u0435\u0442 \u0432\u0430\u043C
+    \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u0438!\""
   buttonsTexts:
   - "\u041E\u043A"
   buttonActions:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4132807348697693769}
-        m_TargetAssemblyTypeName: Grail.DonkeyOnRoad, Assembly-CSharp
-        m_MethodName: CloseDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7837839087121831681
 GameObject:
   m_ObjectHideFlags: 0

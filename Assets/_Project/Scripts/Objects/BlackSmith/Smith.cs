@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Grail
 {
-    public class Smith : MonoBehaviour, IWorldObject
+    public class Smith : Dialogue, IWorldObject
     {
         [SerializeField] private DialogueData firstFrame;
         [SerializeField] private DialogueData rejection;
@@ -24,6 +24,7 @@ namespace Grail
 
         public void ActivateObject(TileData tileData)
         {
+            //AddClosingMethod();
             thisTileData = tileData;
             dialogueManager.ShowDialogue(firstFrame);
         }
@@ -46,7 +47,7 @@ namespace Grail
             }
         }
 
-        public void CloseDialogue()
+        protected override void CloseDialogue()
         {
             dialogueManager.HideDialogue();
         }

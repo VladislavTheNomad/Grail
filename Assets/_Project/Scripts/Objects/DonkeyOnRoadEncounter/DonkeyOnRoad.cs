@@ -1,19 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace Grail
 {
-    public class DonkeyOnRoad : MonoBehaviour, IWorldObject
+    public class DonkeyOnRoad : Dialogue, IWorldObject
     {
         private const int SIDES_OF_RANDOM_DICE = 2;
 
         [SerializeField] private DialogueData firstFrame;
 
-        [SerializeField] private DialogueData helpBrench;
+        //[SerializeField] private DialogueData helpBrench;
         [SerializeField] private DialogueData helpBrenchResult_Plus;
         [SerializeField] private DialogueData helpBrenchResult_Minus;
 
-        [SerializeField] private DialogueData giveMoneyBrench;
+        //[SerializeField] private DialogueData giveMoneyBrench;
         [SerializeField] private DialogueData giveMoneyBrench_ResultPlus;
         [SerializeField] private DialogueData giveMoneyBrench_ResultMinus;
         [SerializeField] private DialogueData giveMoneyBrench_Rejection;
@@ -26,7 +27,7 @@ namespace Grail
         private PlayerInventory playerInventory;
 
         [Inject]
-        public void Construct(DialogueManager dm, TurnsManager tm, PlayerInventory pi)
+        public void Construct(TurnsManager tm, PlayerInventory pi, DialogueManager dm)
         {
             dialogueManager = dm;
             turnsManager = tm;
@@ -35,6 +36,8 @@ namespace Grail
 
         public void ActivateObject(TileData tileData)
         {
+            //AddClosingMethod();
+
             thisTileData = tileData;
             dialogueManager.ShowDialogue(firstFrame);
             thisTileData.DeactivateObject();
@@ -43,7 +46,7 @@ namespace Grail
         public void DoHelp()
         {
             turnsManager.AddTurns(Random.Range(objectProperties.SpentTurnsMin, objectProperties.SpentTurnsMax+1));
-            dialogueManager.ShowDialogue(helpBrench);
+            DoHelpReward();
         }
 
         public void GiveMoney()
@@ -51,7 +54,7 @@ namespace Grail
             if (playerInventory.CurrentGold >= objectProperties.GiveGold)
             {
                 playerInventory.AddResource(-objectProperties.GiveGold, Resource.Gold);
-                dialogueManager.ShowDialogue(giveMoneyBrench);
+                GiveMoneyReward();
             }
             else
             {
@@ -91,9 +94,14 @@ namespace Grail
             }
         }
 
-        public void CloseDialogue()
+        protected override void CloseDialogue()
         {
             dialogueManager.HideDialogue();
+        }
+
+        protected override void AddClosingMethod()
+        {
+            base.AddClosingMethod();
         }
     }
 }
