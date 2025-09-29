@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Zenject;
 
 namespace Grail
@@ -14,6 +15,7 @@ namespace Grail
         PhysicalDefence,
         MagicalDefence,
         AttackSpeed,
+        BattleEffect,
     }
 
     public class PlayerStats : IInitializable
@@ -29,6 +31,8 @@ namespace Grail
         public float PhysicalDefence { get; private set; }
         public float MagicalDefence { get; private set; }
         public float AttackSpeed { get; private set; }
+        public float WeaponEffect { get; private set; }
+        public List<IPlayerBattleEffect> ActiveBattleEffects { get; private set; }
 
         public void Initialize()
         {
@@ -39,6 +43,7 @@ namespace Grail
             PhysicalDefence = 0f;
             MagicalDefence = 0f;
             AttackSpeed = 2f;
+            ActiveBattleEffects = new List<IPlayerBattleEffect>();
         }
 
         public void AddStat(float num, Stats stat)
@@ -114,6 +119,10 @@ namespace Grail
             }
             OnStatsChanged?.Invoke();
         }
+
+        public void AddBattleEffect(IPlayerBattleEffect be) => ActiveBattleEffects.Add(be);
+
+        public void RemoveBattleEffect(IPlayerBattleEffect be) => ActiveBattleEffects.Remove(be);
 
         public void TakeDamage(float dmg) => Hp -= dmg;
     }

@@ -10,11 +10,9 @@ namespace Grail
 
         [SerializeField] private DialogueData firstFrame;
 
-        //[SerializeField] private DialogueData helpBrench;
         [SerializeField] private DialogueData helpBrenchResult_Plus;
         [SerializeField] private DialogueData helpBrenchResult_Minus;
 
-        //[SerializeField] private DialogueData giveMoneyBrench;
         [SerializeField] private DialogueData giveMoneyBrench_ResultPlus;
         [SerializeField] private DialogueData giveMoneyBrench_ResultMinus;
         [SerializeField] private DialogueData giveMoneyBrench_Rejection;
@@ -36,8 +34,6 @@ namespace Grail
 
         public void ActivateObject(TileData tileData)
         {
-            //AddClosingMethod();
-
             thisTileData = tileData;
             dialogueManager.ShowDialogue(firstFrame);
             thisTileData.DeactivateObject();

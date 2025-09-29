@@ -38,10 +38,13 @@ namespace Grail
                     }
                 }
             }
-
+            //objects
             FillGridWithInteractableObjects<GoldPile>(tilemap, tileGrid);
             FillGridWithInteractableObjects<Smith>(tilemap, tileGrid);
+
+            //events
             FillGridWithInteractableObjects<DonkeyOnRoad>(tilemap, tileGrid);
+            FillGridWithInteractableObjects<PoisonPowerEncounter>(tilemap, tileGrid);
 
             //enemies
             FillGridWithInteractableObjects<Enemy>(tilemap, tileGrid);
@@ -49,7 +52,7 @@ namespace Grail
             return tileGrid;
         }
 
-        private void FillGridWithInteractableObjects<T>(Tilemap tilemap, TileData[,] tileGrid) where T : MonoBehaviour, IWorldObject
+        public void FillGridWithInteractableObjects<T>(Tilemap tilemap, TileData[,] tileGrid) where T : MonoBehaviour, IWorldObject
         {
             T[] interactableObjectsOnWorldMap = Object.FindObjectsByType<T>(FindObjectsSortMode.None);
             foreach (var interactableObject in interactableObjectsOnWorldMap)

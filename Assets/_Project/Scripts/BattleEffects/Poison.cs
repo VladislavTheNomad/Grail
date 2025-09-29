@@ -3,10 +3,9 @@ using Zenject;
 
 namespace Grail
 {
-    public class Poison : Effect, IEnemyBattleEffect
+    public class Poison : IEnemyBattleEffect, IPlayerBattleEffect
     {
-        [SerializeField, Range(0, 1)] float effectChance;
-
+        private float effectChance = 0.1f;
         private BattleManager battleManager;
 
         [Inject]
@@ -17,11 +16,23 @@ namespace Grail
 
         public void DoEnemyBattleEffect()
         {
+            Debug.Log("Im here2");
             float roll = Random.value;
             if(roll <= effectChance)
             {
                 battleManager.SetStatus(Statuses.Poison, Sides.Player);
             }
         }
+
+        public void DoPlayerBattleEffect()
+        {
+            float roll = Random.value;
+            if (roll <= effectChance)
+            {
+                battleManager.SetStatus(Statuses.Poison, Sides.Enemy);
+            }
+        }
+
+        public string GetInfoAboutEffect() => "TEXT ABOUT POISON";
     }
 }

@@ -24,7 +24,6 @@ namespace Grail
 
         public void ActivateObject(TileData tileData)
         {
-            //AddClosingMethod();
             thisTileData = tileData;
             dialogueManager.ShowDialogue(firstFrame);
         }

@@ -12,13 +12,18 @@ namespace Grail
         protected virtual void AddClosingMethod()
         {
             DialogueData[] list = GetComponentsInChildren<DialogueData>();
+            DialogueData mainDialogue = GetComponentInParent<DialogueData>();
 
             foreach (var dialogue in list)
             {
-                if (dialogue.IsLastDialoguePanel)
+                if (dialogue.IsClosingDialoguePanel)
                 {
                     dialogue.SetSingleEvent(CloseDialogue);
                 }
+            }
+            if (mainDialogue.IsClosingDialoguePanel)
+            {
+                mainDialogue.SetSingleEvent(CloseDialogue);
             }
         }
 

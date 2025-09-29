@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -9,6 +10,12 @@ namespace Grail
     {
         Poison,
         Ignite,
+    }
+
+    public enum TypeAttack
+    {
+        Physical,
+        Magical,
     }
 
     public enum Sides
@@ -23,14 +30,16 @@ namespace Grail
         MightAndMagic,
     }
 
-
-    public class BattleManager : IInitializable
+    public class BattleManager : MonoBehaviour, IInitializable
     {
 
         private const int MIGHT_DAMAGE_MODIFICATOR = 2;
+        private const float BATTLE_TURN_TIME = 3.0f;
 
         public event Action OnPlayerDeath;
         public event Action OnPlayerWon;
+        public event Action OnUpdateStats;
+        public event Action<Sides, int, TypeAttack, Sides> OnDamageDeals;
 
         private Enemy enemy;
         private int playerMinDamage;
@@ -62,8 +71,7 @@ namespace Grail
 
             CalculateDamage(Sides.Player, out playerMinDamage, out playerMaxDamage);
             CalculateDamage(Sides.Enemy, out enemyMinDamage, out enemyMaxDamage);
-
-            DoBattle(mod);
+            StartCoroutine(DoBattle(mod));
         }
 
         public void SetStatus(Statuses status, Sides side)
@@ -102,73 +110,82 @@ namespace Grail
             }
         }
 
-        private void DoBattle(BattleMods mode)
+        private IEnumerator DoBattle(BattleMods mode)
         {
             playMode = mode;
+            float AttackPlayerCooldown = 0f;
+            float AttackEnemyCooldown = 0f;
+            float DelayToPlayerNextAttack = BATTLE_TURN_TIME / playerStats.AttackSpeed;
+            float DelayToEnemyNextAttack = BATTLE_TURN_TIME / enemy.AttackSpeed;
 
             while (enemy.Hp > 0 && playerStats.Hp > 0)
             {
-                PlayerTurn();
+                AttackPlayerCooldown += Time.deltaTime;
+                AttackEnemyCooldown += Time.deltaTime;
 
+                if (playerStats.Hp > 0)
+                {
+                    if (AttackPlayerCooldown >= DelayToPlayerNextAttack)
+                    {
+                        AttackPlayerCooldown = 0f;
+                        PerformTurn(Sides.Player);
+                        OnUpdateStats?.Invoke();
+                    }
+                }
+                else
+                {
+                    OnPlayerDeath?.Invoke();
+                }
                 if (enemy.Hp > 0)
                 {
-                    EnemyTurn();
+                    if (AttackEnemyCooldown >= DelayToEnemyNextAttack)
+                    {
+                        AttackEnemyCooldown = 0f;
+                        PerformTurn(Sides.Enemy);
+                        OnUpdateStats?.Invoke();
+                    }
                 }
                 else
                 {
                     OnPlayerWon?.Invoke();
-                    break;
                 }
-                
-                foreach (var status in playerStatuses)
-                {
-                    switch (status)
-                    {
-                        case Statuses.Poison:
-                            float inflictPoisonDmg = playerStats.Hp * 0.95f;
-                            playerStats.SetStat(inflictPoisonDmg, Stats.Hp);
-                            break;
-                        case Statuses.Ignite:
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                yield return null;
             }
-
-            if (playerStats.Hp <= 0)
-            {
-                OnPlayerDeath?.Invoke();
-            }
-
             EndBattle();
         }
 
-        private void EnemyTurn()
+        private void PerformTurn(Sides side)
         {
-            DoMightTurn(Sides.Enemy);
-
-            if (enemy.Magic > 0)
+            switch (side)
             {
-                DoMagicTurn(Sides.Enemy);
+                case Sides.Player:
+
+                    DoDamage(side, TypeAttack.Physical);
+                    if (playMode == BattleMods.MightAndMagic && playerStats.Mana > 0)
+                    {
+                        DoDamage(side, TypeAttack.Magical);
+                        playerStats.AddStat(-1, Stats.Mana);
+                    }
+                    DoBattleEffect(Sides.Player);
+                    break;
+
+                case Sides.Enemy:
+
+                    if (enemy.Might > 0)
+                    {
+                        DoDamage(side, TypeAttack.Physical);
+                    }
+
+                    if (enemy.Magic > 0)
+                    {
+                        DoDamage(side, TypeAttack.Magical);
+                    }
+                    DoBattleEffect(Sides.Enemy);
+                    break;
+
+                default:
+                    break;
             }
-
-            EnemyDoBattleEffect();
-        }
-
-        private void PlayerTurn()
-        {
-            DoMightTurn(Sides.Player);
-
-            if (playMode == BattleMods.MightAndMagic)
-            {
-                DoMagicTurn(Sides.Player);
-            }
-        }
-
-        private void DoMagicTurn(Sides side)
-        {
-            // DO IT
         }
 
         private void CalculateDamage(Sides side, out int minDamage, out int maxDamage)
@@ -190,35 +207,84 @@ namespace Grail
             }
         }
 
-        private void DoMightTurn(Sides side)
+        private void DoDamage(Sides side, TypeAttack typeAttack)
         {
-            float doDamage;
+            int doDamage;
 
             switch (side)
             {
                 case Sides.Player:
-                    doDamage = UnityEngine.Random.Range(playerMinDamage, playerMaxDamage + 1) * (1 - enemy.PhysicalDefence);
-                    enemy.TakeDamage(doDamage);
+
+                    switch (typeAttack)
+                    {
+                        case TypeAttack.Physical:
+                            doDamage = Mathf.RoundToInt(UnityEngine.Random.Range(playerMinDamage, playerMaxDamage + 1) * (1 - enemy.PhysicalDefence));
+                            enemy.TakeDamage(doDamage);
+                            OnDamageDeals?.Invoke(Sides.Player, doDamage, TypeAttack.Physical, Sides.Enemy);
+                            break;
+                        case TypeAttack.Magical:
+                            doDamage = Mathf.RoundToInt(playerStats.Magic * (1 - enemy.MagicalDefence));
+                            enemy.TakeDamage(doDamage);
+                            OnDamageDeals?.Invoke(Sides.Player, doDamage, TypeAttack.Magical, Sides.Enemy);
+                            break;
+                        default:
+                            break;
+                    }
                     break;
+
                 case Sides.Enemy:
-                    doDamage = UnityEngine.Random.Range(enemyMinDamage, enemyMaxDamage + 1) * (1 - playerStats.PhysicalDefence);
-                    playerStats.TakeDamage(doDamage);
+
+                    switch (typeAttack)
+                    {
+                        case TypeAttack.Physical:
+                            doDamage = Mathf.RoundToInt(UnityEngine.Random.Range(enemyMinDamage, enemyMaxDamage + 1) * (1 - playerStats.PhysicalDefence));
+                            playerStats.TakeDamage(doDamage);
+                            OnDamageDeals?.Invoke(Sides.Enemy, doDamage, TypeAttack.Physical, Sides.Player);
+                            break;
+                        case TypeAttack.Magical:
+                            doDamage = Mathf.RoundToInt(enemy.Magic * (1 - playerStats.MagicalDefence));
+                            playerStats.TakeDamage(doDamage);
+                            OnDamageDeals?.Invoke(Sides.Enemy, doDamage, TypeAttack.Magical, Sides.Player);
+                            break;
+                        default:
+                            break;
+                    }
                     break;
+
                 default:
                     break;
             }
         }
 
-        private void EnemyDoBattleEffect()
+        private void DoBattleEffect(Sides side)
         {
-            foreach (var effect in enemy.ActiveBattleEffects)
+            switch (side)
             {
-                effect.DoEnemyBattleEffect();
+                case Sides.Player:
+
+                    foreach (var effect in playerStats.ActiveBattleEffects)
+                    {
+                        effect.DoPlayerBattleEffect();
+                    }
+                    break;
+
+                case Sides.Enemy:
+
+                    foreach (var effect in enemy.ActiveBattleEffects)
+                    {
+                        effect.DoEnemyBattleEffect();
+                        Debug.Log("Im here");
+                    }
+                    break;
+
+                default:
+                    break;
             }
         }
 
         private void EndBattle()
         {
+            StopAllCoroutines();
             enemy = null;
             playerStatuses.Clear();
             enemyStatuses.Clear();

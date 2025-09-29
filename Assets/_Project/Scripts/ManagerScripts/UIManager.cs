@@ -18,6 +18,7 @@ namespace Grail
         [SerializeField] private TextMeshProUGUI magicText;
         [SerializeField] private TextMeshProUGUI physDefText;
         [SerializeField] private TextMeshProUGUI magicDefText;
+        [SerializeField] private TextMeshProUGUI atkSpeedText;
 
         private BattleManager battleManager;
         private TurnsManager turnsManager;
@@ -102,6 +103,7 @@ namespace Grail
             magicText.text = $"Magic: {playerStats.Magic}";
             physDefText.text = $"Phys. Def.: {(int)(playerStats.PhysicalDefence * 100)}%";
             magicDefText.text = $"Magic Def.: {(int)(playerStats.MagicalDefence * 100)}%";
+            atkSpeedText.text = $"Attack speed: {playerStats.AttackSpeed} per 3 sec.";
         }
 
         private void GameOverUI()

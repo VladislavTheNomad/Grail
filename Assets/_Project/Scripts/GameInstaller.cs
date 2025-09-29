@@ -9,12 +9,12 @@ namespace Grail
         [SerializeField] private DialogueManager dialogueManager;
         [SerializeField] private UIManager uiManager;
         [SerializeField] private BattleUI battleUI;
+        [SerializeField] private BattleManager battleManager;
         [SerializeField] private GameObject playerView;
 
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<TileGridConstructor>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<BattleManager>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<InterationsWithObjectsManager>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<TurnsManager>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameStateManager>().AsSingle().NonLazy();
@@ -26,7 +26,10 @@ namespace Grail
             Container.BindInterfacesAndSelfTo<DialogueManager>().FromInstance(dialogueManager).AsSingle();
             Container.BindInterfacesAndSelfTo<BattleUI>().FromInstance(battleUI).AsSingle();
             Container.BindInterfacesAndSelfTo<UIManager>().FromInstance(uiManager).AsSingle();
+            Container.BindInterfacesAndSelfTo<BattleManager>().FromInstance(battleManager).AsSingle();
             Container.BindInterfacesAndSelfTo<GameObject>().FromInstance(playerView).AsSingle();
+
+            Container.Bind<Poison>().AsTransient();
         }
     }
 }

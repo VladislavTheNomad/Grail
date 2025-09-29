@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
 
 namespace Grail
 {
@@ -15,17 +14,17 @@ namespace Grail
         public string[] GetButtonsTexts() => buttonsTexts;
         public UnityEvent[] GetButtonEvents() => buttonActions;
 
-        public bool IsLastDialoguePanel { get; private set; }
+        public bool IsClosingDialoguePanel { get; private set; }
 
         public void Awake()
         {
             if (buttonsTexts.Length == 1)
             {
-                IsLastDialoguePanel = true;
+                IsClosingDialoguePanel = true;
             }
             else
             {
-                IsLastDialoguePanel = false;
+                IsClosingDialoguePanel = false;
             }
         }
 

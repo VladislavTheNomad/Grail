@@ -4,9 +4,9 @@ using Zenject;
 
 namespace Grail
 {
-    abstract public class Enemy : MonoBehaviour, IWorldObject
+    public class Enemy : MonoBehaviour, IWorldObject
     {
-        [SerializeField] protected abstract EnemyStats Stats { get; }
+        [SerializeField] private EnemyStats stats;
 
         public string Name { get; set; }
         public int Hp { get; set; }
@@ -14,42 +14,42 @@ namespace Grail
         public int Magic { get; set; }
         public float PhysicalDefence { get; set; }
         public float MagicalDefence { get; set; }
+        public float AttackSpeed { get; set; }
         public List<IEnemyBattleEffect> ActiveBattleEffects { get; set; }
+        public TileData TileData { get; private set; }
+        public DiContainer diContainer { get; private set; }
 
-        private TileData tileData;
         private BattleUI battleUI;
         private BattleManager battleManager;
 
+
         [Inject]
-        public void Construct(BattleUI bu, BattleManager bm)
+        public void Construct(BattleUI bu, BattleManager bm, DiContainer container)
         {
             battleUI = bu;
             battleManager = bm;
-        }
-
-        public void SetTileData(TileData tiledata)
-        {
-            tileData = tiledata;
+            diContainer = container;
         }
 
         public virtual void ActivateObject(TileData tileData) 
         {
-            SetTileData(tileData);
+            this.TileData = tileData;
             ActiveBattleEffects = new List<IEnemyBattleEffect>(GetComponentsInChildren<IEnemyBattleEffect>());
 
-            Name = Stats.Name;
-            Hp = Stats.Hp;
-            Might = Stats.Might;
-            Magic = Stats.Magic;
-            PhysicalDefence = Stats.PhysicalDefence;
-            MagicalDefence = Stats.MagicalDefence;
+            Name = stats.Name;
+            Hp = stats.Hp;
+            Might = stats.Might;
+            Magic = stats.Magic;
+            PhysicalDefence = stats.PhysicalDefence;
+            MagicalDefence = stats.MagicalDefence;
+            AttackSpeed = stats.AttackSpeed;
 
             battleUI.ShowInfoUI(this);
         }
 
         public void RemoveEnemy()
         {
-            tileData.RemoveFromMap();
+            TileData.RemoveFromMap();
         }
 
         public void StartBattle(BattleMods mode)
@@ -61,5 +61,7 @@ namespace Grail
         {
             Hp -= Mathf.RoundToInt(dmg);
         }
+
+        public virtual void AddBattleEffect(IEnemyBattleEffect battleEffect) => ActiveBattleEffects.Add(battleEffect);
     }
 }

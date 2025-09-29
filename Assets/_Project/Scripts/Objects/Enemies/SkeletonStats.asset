@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ec95c6c9992a74e89cf9652444b3d0, type: 3}
   m_Name: SkeletonStats
   m_EditorClassIdentifier: 
-  <Hp>k__BackingField: 20
+  <Hp>k__BackingField: 35
   <Might>k__BackingField: 5
   <Magic>k__BackingField: 0
   <PhysicalDefence>k__BackingField: 0.15
   <MagicalDefence>k__BackingField: 0.1
+  <AttackSpeed>k__BackingField: 1
   <Name>k__BackingField: Skeleton
   <DescriptionAbout>k__BackingField: Skeleton is never feel fatigue and feels hatred
     to any form of lives.

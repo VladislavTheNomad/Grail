@@ -13,5 +13,6 @@ namespace Grail
         public Button GetButton() => button;
         public TextMeshProUGUI GetTextOnButton() => buttonText;
         public void HideButton() => button.gameObject.SetActive(false);
+        public void ShowButton() => button.gameObject.SetActive(true);
     }
 }

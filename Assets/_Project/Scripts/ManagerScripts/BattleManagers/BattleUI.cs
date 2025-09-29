@@ -7,17 +7,20 @@ namespace Grail
 {
     public class BattleUI : MonoBehaviour, IInitializable
     {
-        [SerializeField] private GameObject beforeBattleUI;
+        private const int LAST_INDEX_BUTTON = 3;
+
+        [SerializeField] private GameObject battleUI;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private TextMeshProUGUI playerStatsText;
         [SerializeField] private TextMeshProUGUI enemyStatsText;
         [SerializeField] private List<DialogueOption> options;
 
-        private Enemy enemy;
         private BattleManager battleManager;
         private GameStateManager gameStateManager;
         private PlayerStats playerStats;
         private PlayerController playerController;
+
+        public Enemy enemy { get; private set; }
 
         [Inject]
         public void Construct(BattleManager bm, GameStateManager gsm, PlayerStats ps, PlayerController pc)
@@ -31,34 +34,74 @@ namespace Grail
         public void OnDestroy()
         {
             battleManager.OnPlayerWon -= ShowWinInfo;
+            battleManager.OnUpdateStats -= UpdatePlayerStats;
+            battleManager.OnUpdateStats -= UpdateEnemyStats;
+            battleManager.OnDamageDeals -= AddToLog;
         }
 
         public void Initialize()
         {
             battleManager.OnPlayerWon += ShowWinInfo;
+            battleManager.OnUpdateStats += UpdatePlayerStats;
+            battleManager.OnUpdateStats += UpdateEnemyStats;
+            battleManager.OnDamageDeals += AddToLog;
         }
 
         public void ShowInfoUI(Enemy importedEnemy)
         {
             enemy = importedEnemy;
             gameStateManager.StopInputSystem();
-            beforeBattleUI.SetActive(true);
+            battleUI.SetActive(true);
+            options[LAST_INDEX_BUTTON].HideButton();
 
-            enemyStatsText.text =
-                $"{enemy.Name}\n" +
-                $"\n" +
-                $"HP: {enemy.Hp}\n" +
-                $"Might: {enemy.Might}\n" +
-                $"Magic: {enemy.Magic}\n" +
-                $"Physical Def: {enemy.PhysicalDefence * 100:F0}%\n" +
-                $"Magical Def: {enemy.MagicalDefence * 100:F0}%\n";
+            UpdateEnemyStats();
+            UpdatePlayerStats();
 
             descriptionText.text = "";
+
             foreach (var effect in enemy.ActiveBattleEffects)
             {
                 descriptionText.text += $"{effect.GetInfoAboutEffect()}\n";
             }
+        }
 
+        public void ExitFromBattleUI()
+        {
+            battleUI.SetActive(false);
+            gameStateManager.PlayInputSystem();
+        }
+
+        public void Retreat()
+        {
+            playerController.ReturnOnPreviousTile();
+            battleUI.SetActive(false);
+            gameStateManager.PlayInputSystem();
+        }
+
+        public void DoBattleWithMight()
+        {
+            enemy.TileData.RemoveFromMap();
+            enemy.StartBattle(BattleMods.OnlyMight);
+            descriptionText.text = "";
+            foreach (var option in options)
+            {
+                option.HideButton();
+            }
+        }
+
+        public void DoBattleWithMightAndMagic()
+        {
+            enemy.TileData.RemoveFromMap();
+            enemy.StartBattle(BattleMods.MightAndMagic);
+            descriptionText.text = "";
+            foreach (var option in options)
+            {
+                option.HideButton();
+            }
+        }
+
+        private void UpdatePlayerStats()
+        {
             playerStatsText.text =
                 $"Player\n" +
                 $"\n" +
@@ -67,52 +110,33 @@ namespace Grail
                 $"Might: {playerStats.Might}\n" +
                 $"Magic: {playerStats.Magic}\n" +
                 $"Physical Def: {playerStats.PhysicalDefence * 100:F0}%\n" +
-                $"Magical Def: {playerStats.MagicalDefence * 100:F0}%\n";
+                $"Magical Def: {playerStats.MagicalDefence * 100:F0}%\n" +
+                $"Atk. speed: {playerStats.AttackSpeed} per 3 sec.\n";
         }
 
-        public void Retreat()
+        private void UpdateEnemyStats()
         {
-            playerController.ReturnOnPreviousTile();
-            beforeBattleUI.SetActive(false);
-            gameStateManager.PlayInputSystem();
+            enemyStatsText.text =
+                $"{enemy.Name}\n" +
+                $"\n" +
+                $"HP: {enemy.Hp}\n" +
+                $"Might: {enemy.Might}\n" +
+                $"Magic: {enemy.Magic}\n" +
+                $"Physical def: {enemy.PhysicalDefence * 100:F0}%\n" +
+                $"Magical def: {enemy.MagicalDefence * 100:F0}%\n" +
+                $"Atk. speed: {enemy.AttackSpeed} per 3 sec.\n";
         }
 
-        public void DoBattleWithMight()
+        private void AddToLog(Sides attackingSide, int damage, TypeAttack typeAttack, Sides attackedSide)
         {
-            enemy.StartBattle(BattleMods.OnlyMight);
-        }
-
-        public void DoBattleWithMightAndMagic()
-        {
-            enemy.StartBattle(BattleMods.MightAndMagic);
+            descriptionText.text += $"{attackingSide} deals {damage} {typeAttack} damage to {attackedSide} \n";
+            descriptionText.text += "\n";
         }
 
         private void ShowWinInfo()
         {
-            // do win UI
+            descriptionText.text += $"Player slays {enemy.Name}!\n";
+            options[LAST_INDEX_BUTTON].ShowButton();
         }
-
-
-
-        //descriptionText.text = dialogueData.GetDescription();
-        //List<string> buttonsTexts = new List<string>(options.Count);
-        //buttonsTexts.AddRange(dialogueData.GetButtonsTexts());
-        //List<UnityEvent> buttonsEvents = new List<UnityEvent>(options.Count);
-        //buttonsEvents.AddRange(dialogueData.GetButtonEvents());
-
-        //int numberOfButtonsInDialogue = Mathf.Min(options.Count, buttonsTexts.Count, buttonsEvents.Count);
-
-        //for (int i = 0; i < numberOfButtonsInDialogue; i++)
-        //{
-        //    SetupButton(options[i].GetButton(), options[i].GetTextOnButton(), buttonsTexts[i], buttonsEvents[i]);
-        //}
-
-        //if (options.Count > numberOfButtonsInDialogue)
-        //{
-        //    for (int i = numberOfButtonsInDialogue; i < options.Count; i++)
-        //    {
-        //        options[i].HideButton();
-        //    }
-
     }    
 }
