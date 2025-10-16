@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MinGoldFromPile>k__BackingField: 25
   <MaxGoldFromPile>k__BackingField: 51
+  <Info>k__BackingField: There is some gold in a small pile.

@@ -21,14 +21,14 @@ namespace Grail
 
         private TileData thisTileData;
         private DialogueManager dialogueManager;
-        private TurnsManager turnsManager;
+        private PlayerStats playerStats;
         private PlayerInventory playerInventory;
 
         [Inject]
-        public void Construct(TurnsManager tm, PlayerInventory pi, DialogueManager dm)
+        public void Construct(PlayerStats ps, PlayerInventory pi, DialogueManager dm)
         {
             dialogueManager = dm;
-            turnsManager = tm;
+            playerStats = ps;
             playerInventory = pi;
         }
 
@@ -39,9 +39,15 @@ namespace Grail
             thisTileData.DeactivateObject();
         }
 
+        public string GetInfo()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void DoHelp()
         {
-            turnsManager.AddTurns(Random.Range(objectProperties.SpentTurnsMin, objectProperties.SpentTurnsMax+1));
+            float randomFatigue = Random.Range(objectProperties.SpentFatigueMin, objectProperties.SpentFatigueMax+1);
+            playerStats.AddStat(randomFatigue, Stats.Fatigue);
             DoHelpReward();
         }
 
@@ -90,7 +96,7 @@ namespace Grail
             }
         }
 
-        protected override void CloseDialogue()
+        public override void CloseDialogue()
         {
             dialogueManager.HideDialogue();
         }

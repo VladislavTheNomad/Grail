@@ -21,12 +21,12 @@ namespace Grail
                     dialogue.SetSingleEvent(CloseDialogue);
                 }
             }
-            if (mainDialogue.IsClosingDialoguePanel)
+            if (mainDialogue!= null && mainDialogue.IsClosingDialoguePanel)
             {
                 mainDialogue.SetSingleEvent(CloseDialogue);
             }
         }
 
-        protected abstract void CloseDialogue();
+        public abstract void CloseDialogue();
     }
 }

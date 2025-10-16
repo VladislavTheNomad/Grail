@@ -9,11 +9,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Object
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - ObjectsWithLight
   - 
   - 
   - 
@@ -53,6 +53,12 @@ TagManager:
     locked: 0
   - name: Characters
     uniqueID: 1385205083
+    locked: 0
+  - name: UI
+    uniqueID: 4135501381
+    locked: 0
+  - name: ObjectsWithLight
+    uniqueID: 3385344097
     locked: 0
   m_RenderingLayers:
   - Default

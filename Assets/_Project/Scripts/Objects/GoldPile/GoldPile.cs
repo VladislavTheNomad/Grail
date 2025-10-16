@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -8,17 +9,27 @@ namespace Grail
         [SerializeField] private GoldPileData objectProperties;
 
         private PlayerInventory inventory;
+        private PopupFactory popupFactory;
 
         [Inject]
-        public void Construct(PlayerInventory pi)
+        public void Construct(PlayerInventory pi, PopupFactory pf)
         {
             inventory = pi;
+            popupFactory = pf;
         }
 
         public void ActivateObject(TileData tileData)
         {
-            inventory.AddResource(Random.Range(objectProperties.MinGoldFromPile, objectProperties.MaxGoldFromPile), Resource.Gold);
+            int res = Random.Range(objectProperties.MinGoldFromPile, objectProperties.MaxGoldFromPile);
+            inventory.AddResource(res, Resource.Gold);
+            Popup popup = popupFactory.GetFromPool();
+            popup.ShowPopup(res, PopupType.Gold, transform);
             tileData.RemoveFromMap();
+        }
+
+        public string GetInfo()
+        {
+            return objectProperties.Info;
         }
     }
 }

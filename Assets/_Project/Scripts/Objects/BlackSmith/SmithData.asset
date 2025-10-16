@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CostInGold>k__BackingField: 50
   <MightBonus>k__BackingField: 1
+  <Info>k__BackingField: Smith could improve your Might skill, If you have some gold,
+    of course

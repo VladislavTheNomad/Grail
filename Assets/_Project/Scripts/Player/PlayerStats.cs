@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Zenject;
 
 namespace Grail
@@ -14,7 +15,7 @@ namespace Grail
         Magic,
         PhysicalDefence,
         MagicalDefence,
-        AttackSpeed,
+        Fatigue,
         BattleEffect,
     }
 
@@ -30,19 +31,23 @@ namespace Grail
         public float Magic { get; private set; }
         public float PhysicalDefence { get; private set; }
         public float MagicalDefence { get; private set; }
-        public float AttackSpeed { get; private set; }
+        public float Fatigue { get; private set; }
+        public float MaxFatigue { get; private set; }
         public float WeaponEffect { get; private set; }
         public List<IPlayerBattleEffect> ActiveBattleEffects { get; private set; }
 
         public void Initialize()
         {
             Hp = 100;
+            MaxHp = 100;
             Mana = 5;
+            MaxMana = 100;
             Might = 5;
             Magic = 5;
             PhysicalDefence = 0f;
             MagicalDefence = 0f;
-            AttackSpeed = 2f;
+            Fatigue = 0f;
+            MaxFatigue = 100f;
             ActiveBattleEffects = new List<IPlayerBattleEffect>();
         }
 
@@ -52,12 +57,14 @@ namespace Grail
             {
                 case Stats.Hp:
                     Hp += num;
+                    CheckStat(Stats.Hp);
                     break;
                 case Stats.MaxHp:
                     MaxHp += num;
                     break;
                 case Stats.Mana:
                     Mana += num;
+                    CheckStat(Stats.Mana);
                     break;
                 case Stats.MaxMana:
                     MaxMana += num;    
@@ -74,12 +81,13 @@ namespace Grail
                 case Stats.MagicalDefence:
                     MagicalDefence += num;
                     break;
-                case Stats.AttackSpeed:
-                    AttackSpeed += num;
+                case Stats.Fatigue:
+                    Fatigue += num;
+                    CheckStat(Stats.Fatigue);
                     break;
                 default:
                     break;
-            }
+            }         
             OnStatsChanged?.Invoke();
         }
 
@@ -111,8 +119,8 @@ namespace Grail
                 case Stats.MagicalDefence:
                     MagicalDefence = num;
                     break;
-                case Stats.AttackSpeed:
-                    AttackSpeed = num;
+                case Stats.Fatigue:
+                    Fatigue = num;
                     break;
                 default:
                     break;
@@ -125,5 +133,40 @@ namespace Grail
         public void RemoveBattleEffect(IPlayerBattleEffect be) => ActiveBattleEffects.Remove(be);
 
         public void TakeDamage(float dmg) => Hp -= dmg;
+
+        private void CheckStat(Stats stat)
+        {
+            switch (stat)
+            {
+                case Stats.Hp:
+
+                    if (Hp > MaxHp)
+                    {
+                        Hp = MaxHp;
+                    }
+                    break;
+
+                case Stats.Mana:
+
+                    if (Mana > MaxMana)
+                    {
+                        Mana = MaxMana;
+                    }
+                    break;
+                
+                case Stats.Fatigue:
+                    if (Fatigue > MaxFatigue)
+                    {
+                        Fatigue = MaxFatigue;
+                    }
+                    if (Fatigue < 0f)
+                    {
+                        Fatigue = 0f;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

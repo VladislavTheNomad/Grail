@@ -35,4 +35,4 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 0
   isWalkable: 1
-  moveCost: 3
+  fatigueCost: 4

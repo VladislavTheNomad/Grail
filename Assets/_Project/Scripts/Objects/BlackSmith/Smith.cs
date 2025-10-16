@@ -28,6 +28,11 @@ namespace Grail
             dialogueManager.ShowDialogue(firstFrame);
         }
 
+        public string GetInfo()
+        {
+            return objectProperties.Info;
+        }
+
         public void TryPurchase()
         {
             int give = objectProperties.CostInGold;
@@ -46,7 +51,7 @@ namespace Grail
             }
         }
 
-        protected override void CloseDialogue()
+        public override void CloseDialogue()
         {
             dialogueManager.HideDialogue();
         }

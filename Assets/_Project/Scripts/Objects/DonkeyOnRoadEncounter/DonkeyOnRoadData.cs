@@ -8,7 +8,7 @@ namespace Grail
         [Header("DonkeyOnRoad")]
         [field: SerializeField] public int GiveGold { get; private set; }
         [field: SerializeField] public int GetCrystals { get; private set; }
-        [field: SerializeField] public int SpentTurnsMin { get; private set; }
-        [field: SerializeField] public int SpentTurnsMax { get; private set; }
+        [field: SerializeField] public int SpentFatigueMin { get; private set; }
+        [field: SerializeField] public int SpentFatigueMax { get; private set; }
     }
 }
