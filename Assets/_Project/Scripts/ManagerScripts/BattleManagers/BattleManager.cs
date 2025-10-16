@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -24,22 +23,12 @@ namespace Grail
         Enemy,
     }
 
-    public enum BattleMods
-    {
-        OnlyMight,
-        MightAndMagic,
-    }
-
     public class BattleManager : MonoBehaviour, IInitializable
     {
-
         private const int MIGHT_DAMAGE_MODIFICATOR = 2;
-        private const float BATTLE_TURN_TIME = 3.0f;
 
         public event Action OnPlayerDeath;
-        public event Action OnPlayerWon;
         public event Action OnUpdateStats;
-        public event Action<Sides, int, TypeAttack, Sides> OnDamageDeals;
 
         private Enemy enemy;
         private int playerMinDamage;
@@ -49,14 +38,19 @@ namespace Grail
 
         private List<Statuses> playerStatuses;
         private List<Statuses> enemyStatuses;
-        private BattleMods playMode;
 
         private PlayerStats playerStats;
+        private PlayerController playerController;
+        private PlayerView playerView;
+        private PopupFactory damagePopupFactory;
 
         [Inject]
-        public void Construct(PlayerStats ps)
+        public void Construct(PlayerStats ps, PlayerController pc, PlayerView pv, PopupFactory dpf)
         {
             playerStats = ps;
+            playerController = pc;
+            playerView = pv;
+            damagePopupFactory = dpf;
         }
 
         public void Initialize()
@@ -65,93 +59,26 @@ namespace Grail
             enemyStatuses = new List<Statuses>();
         }
 
-        public void PrepareForBattle(Enemy enemyStats, BattleMods mod)
+        public void PrepareForBattle(Enemy enemyStats)
         {
+            playerController.ReturnOnPreviousTile();
             enemy = enemyStats;
 
             CalculateDamage(Sides.Player, out playerMinDamage, out playerMaxDamage);
             CalculateDamage(Sides.Enemy, out enemyMinDamage, out enemyMaxDamage);
-            StartCoroutine(DoBattle(mod));
+            DoBattleRound();
         }
 
-        public void SetStatus(Statuses status, Sides side)
+        private void DoBattleRound()
         {
-            switch (side)
-            {
-                case Sides.Player:
-                    if (!playerStatuses.Contains(status))
-                    {
-                        playerStatuses.Add(status);
-                    }
-                    break;
-                case Sides.Enemy:
-                    if (!enemyStatuses.Contains(status))
-                    { 
-                        enemyStatuses.Add(status);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        public void DeleteStatus(Statuses status, Sides side)
-        {
-            switch (side)
-            {
-                case Sides.Player:
-                    playerStatuses.Remove(status);
-                    break;
-                case Sides.Enemy:
-                    enemyStatuses.Remove(status);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private IEnumerator DoBattle(BattleMods mode)
-        {
-            playMode = mode;
-            float AttackPlayerCooldown = 0f;
-            float AttackEnemyCooldown = 0f;
-            float DelayToPlayerNextAttack = BATTLE_TURN_TIME / playerStats.AttackSpeed;
-            float DelayToEnemyNextAttack = BATTLE_TURN_TIME / enemy.AttackSpeed;
-
-            while (enemy.Hp > 0 && playerStats.Hp > 0)
-            {
-                AttackPlayerCooldown += Time.deltaTime;
-                AttackEnemyCooldown += Time.deltaTime;
-
-                if (playerStats.Hp > 0)
-                {
-                    if (AttackPlayerCooldown >= DelayToPlayerNextAttack)
-                    {
-                        AttackPlayerCooldown = 0f;
-                        PerformTurn(Sides.Player);
-                        OnUpdateStats?.Invoke();
-                    }
-                }
-                else
-                {
-                    OnPlayerDeath?.Invoke();
-                }
-                if (enemy.Hp > 0)
-                {
-                    if (AttackEnemyCooldown >= DelayToEnemyNextAttack)
-                    {
-                        AttackEnemyCooldown = 0f;
-                        PerformTurn(Sides.Enemy);
-                        OnUpdateStats?.Invoke();
-                    }
-                }
-                else
-                {
-                    OnPlayerWon?.Invoke();
-                }
-                yield return null;
-            }
-            EndBattle();
+            PerformTurn(Sides.Player);
+            PerformTurn(Sides.Enemy);
+            OnUpdateStats?.Invoke();
+            
+            if(playerStats.Hp <= 0)
+            { 
+                OnPlayerDeath?.Invoke();
+            }     
         }
 
         private void PerformTurn(Sides side)
@@ -161,12 +88,11 @@ namespace Grail
                 case Sides.Player:
 
                     DoDamage(side, TypeAttack.Physical);
-                    if (playMode == BattleMods.MightAndMagic && playerStats.Mana > 0)
+                    if (playerStats.Mana > 0)
                     {
                         DoDamage(side, TypeAttack.Magical);
                         playerStats.AddStat(-1, Stats.Mana);
                     }
-                    DoBattleEffect(Sides.Player);
                     break;
 
                 case Sides.Enemy:
@@ -180,7 +106,6 @@ namespace Grail
                     {
                         DoDamage(side, TypeAttack.Magical);
                     }
-                    DoBattleEffect(Sides.Enemy);
                     break;
 
                 default:
@@ -210,6 +135,7 @@ namespace Grail
         private void DoDamage(Sides side, TypeAttack typeAttack)
         {
             int doDamage;
+            Popup damagePopup;
 
             switch (side)
             {
@@ -220,12 +146,14 @@ namespace Grail
                         case TypeAttack.Physical:
                             doDamage = Mathf.RoundToInt(UnityEngine.Random.Range(playerMinDamage, playerMaxDamage + 1) * (1 - enemy.PhysicalDefence));
                             enemy.TakeDamage(doDamage);
-                            OnDamageDeals?.Invoke(Sides.Player, doDamage, TypeAttack.Physical, Sides.Enemy);
+                            damagePopup = damagePopupFactory.GetFromPool();
+                            damagePopup.ShowPopup(-doDamage, PopupType.PhysicalAttack, enemy.transform);
                             break;
                         case TypeAttack.Magical:
                             doDamage = Mathf.RoundToInt(playerStats.Magic * (1 - enemy.MagicalDefence));
                             enemy.TakeDamage(doDamage);
-                            OnDamageDeals?.Invoke(Sides.Player, doDamage, TypeAttack.Magical, Sides.Enemy);
+                            damagePopup = damagePopupFactory.GetFromPool();
+                            damagePopup.ShowPopup(-doDamage, PopupType.MagicalAttack, enemy.transform);
                             break;
                         default:
                             break;
@@ -239,12 +167,14 @@ namespace Grail
                         case TypeAttack.Physical:
                             doDamage = Mathf.RoundToInt(UnityEngine.Random.Range(enemyMinDamage, enemyMaxDamage + 1) * (1 - playerStats.PhysicalDefence));
                             playerStats.TakeDamage(doDamage);
-                            OnDamageDeals?.Invoke(Sides.Enemy, doDamage, TypeAttack.Physical, Sides.Player);
+                            damagePopup = damagePopupFactory.GetFromPool();
+                            damagePopup.ShowPopup(-doDamage, PopupType.PhysicalAttack, playerView.GetVisualTransform());
                             break;
                         case TypeAttack.Magical:
                             doDamage = Mathf.RoundToInt(enemy.Magic * (1 - playerStats.MagicalDefence));
                             playerStats.TakeDamage(doDamage);
-                            OnDamageDeals?.Invoke(Sides.Enemy, doDamage, TypeAttack.Magical, Sides.Player);
+                            damagePopup = damagePopupFactory.GetFromPool();
+                            damagePopup.ShowPopup(-doDamage, PopupType.MagicalAttack, playerView.GetVisualTransform());
                             break;
                         default:
                             break;
@@ -254,40 +184,6 @@ namespace Grail
                 default:
                     break;
             }
-        }
-
-        private void DoBattleEffect(Sides side)
-        {
-            switch (side)
-            {
-                case Sides.Player:
-
-                    foreach (var effect in playerStats.ActiveBattleEffects)
-                    {
-                        effect.DoPlayerBattleEffect();
-                    }
-                    break;
-
-                case Sides.Enemy:
-
-                    foreach (var effect in enemy.ActiveBattleEffects)
-                    {
-                        effect.DoEnemyBattleEffect();
-                        Debug.Log("Im here");
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        private void EndBattle()
-        {
-            StopAllCoroutines();
-            enemy = null;
-            playerStatuses.Clear();
-            enemyStatuses.Clear();
         }
     }
 }

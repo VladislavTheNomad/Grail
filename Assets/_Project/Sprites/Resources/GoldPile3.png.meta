@@ -1,0 +1,527 @@
+fileFormatVersion: 2
+guid: 641766707d06ded4baafac975db64b9a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -23540791458112009
+    second: GoldPile3_0
+  - first:
+      213: 7565666262044937812
+    second: GoldPile3_1
+  - first:
+      213: 7563834793850377494
+    second: GoldPile3_2
+  - first:
+      213: -5062311473590733494
+    second: GoldPile3_3
+  - first:
+      213: 6739520782628330320
+    second: GoldPile3_4
+  - first:
+      213: -2753979057140675600
+    second: GoldPile3_5
+  - first:
+      213: -5960083426327292727
+    second: GoldPile3_6
+  - first:
+      213: 5875618686958254210
+    second: GoldPile3_7
+  - first:
+      213: 8183549623937072477
+    second: GoldPile3_8
+  - first:
+      213: -9049380516647976145
+    second: GoldPile3_9
+  - first:
+      213: 7649796497728760745
+    second: GoldPile3_10
+  - first:
+      213: 8945197464530586712
+    second: GoldPile3_11
+  - first:
+      213: 3012668554817168541
+    second: GoldPile3_12
+  - first:
+      213: 7792307742227243725
+    second: GoldPile3_13
+  - first:
+      213: -1304657646651000326
+    second: GoldPile3_14
+  - first:
+      213: 4286184226725561998
+    second: GoldPile3_15
+  - first:
+      213: 5253892323906618671
+    second: GoldPile3_16
+  - first:
+      213: -2746828122225875614
+    second: GoldPile3_17
+  - first:
+      213: 7528403435353476880
+    second: GoldPile3_18
+  - first:
+      213: 4114039593700592159
+    second: GoldPile3_19
+  - first:
+      213: -4412500160170180683
+    second: GoldPile3_20
+  - first:
+      213: -2467079117654355482
+    second: GoldPile3_21
+  - first:
+      213: -1190842355071499425
+    second: GoldPile3_22
+  - first:
+      213: 1335027868241505555
+    second: GoldPile3_23
+  - first:
+      213: -8414411267939120715
+    second: GoldPile3_24
+  - first:
+      213: -1139266968292326425
+    second: GoldPile3_25
+  - first:
+      213: 4336962016832210819
+    second: GoldPile3_26
+  - first:
+      213: -1900090603366094668
+    second: GoldPile3_27
+  - first:
+      213: -8667217885535261533
+    second: GoldPile3_28
+  - first:
+      213: 1926943434860068051
+    second: GoldPile3_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Win64
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GoldPile3_0
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 789
+        width: 283
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fd586f56cd5caff0800000000000000
+      internalID: -23540791458112009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_4
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 784
+        width: 260
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05b9cecb176978d50800000000000000
+      internalID: 6739520782628330320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_6
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 779
+        width: 262
+        height: 159
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c4911e93b7894da0800000000000000
+      internalID: -5960083426327292727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_8
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 546
+        width: 285
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5dfc80560fc19170800000000000000
+      internalID: 8183549623937072477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_10
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 540
+        width: 269
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ab66236269892a60800000000000000
+      internalID: 7649796497728760745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_12
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 535
+        width: 280
+        height: 166
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d94eddbb6162fc920800000000000000
+      internalID: 3012668554817168541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_15
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 308
+        width: 265
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e860cd358d59b7b30800000000000000
+      internalID: 4286184226725561998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_17
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 301
+        width: 257
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2656cab406e41e9d0800000000000000
+      internalID: -2746828122225875614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_20
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 300
+        width: 270
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bfb3b59b76a3c2c0800000000000000
+      internalID: -4412500160170180683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_23
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 64
+        width: 271
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31d28cbd5c8f68210800000000000000
+      internalID: 1335027868241505555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_25
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 60
+        width: 268
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e3899a7ab28030f0800000000000000
+      internalID: -1139266968292326425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoldPile3_28
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 64
+        width: 262
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ac22c5014bd7b780800000000000000
+      internalID: -8667217885535261533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e22c0eca10a0b0b40abf4f4dc22dd1c4
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GoldPile3_0: -23540791458112009
+      GoldPile3_1: 7565666262044937812
+      GoldPile3_10: 7649796497728760745
+      GoldPile3_11: 8945197464530586712
+      GoldPile3_12: 3012668554817168541
+      GoldPile3_13: 7792307742227243725
+      GoldPile3_14: -1304657646651000326
+      GoldPile3_15: 4286184226725561998
+      GoldPile3_16: 5253892323906618671
+      GoldPile3_17: -2746828122225875614
+      GoldPile3_18: 7528403435353476880
+      GoldPile3_19: 4114039593700592159
+      GoldPile3_2: 7563834793850377494
+      GoldPile3_20: -4412500160170180683
+      GoldPile3_21: -2467079117654355482
+      GoldPile3_22: -1190842355071499425
+      GoldPile3_23: 1335027868241505555
+      GoldPile3_24: -8414411267939120715
+      GoldPile3_25: -1139266968292326425
+      GoldPile3_26: 4336962016832210819
+      GoldPile3_27: -1900090603366094668
+      GoldPile3_28: -8667217885535261533
+      GoldPile3_29: 1926943434860068051
+      GoldPile3_3: -5062311473590733494
+      GoldPile3_4: 6739520782628330320
+      GoldPile3_5: -2753979057140675600
+      GoldPile3_6: -5960083426327292727
+      GoldPile3_7: 5875618686958254210
+      GoldPile3_8: 8183549623937072477
+      GoldPile3_9: -9049380516647976145
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

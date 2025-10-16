@@ -38,6 +38,15 @@ namespace Grail
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Info"",
+                    ""type"": ""Button"",
+                    ""id"": ""145f4dde-9328-4960-b24c-d6cedd716ff8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -95,6 +104,17 @@ namespace Grail
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86a701d7-1841-4efb-ac9a-ec841a269a4d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Info"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -165,6 +185,7 @@ namespace Grail
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+            m_Player_Info = m_Player.FindAction("Info", throwIfNotFound: true);
         }
 
         ~@PlayerInputSystem()
@@ -232,11 +253,13 @@ namespace Grail
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
+        private readonly InputAction m_Player_Info;
         public struct PlayerActions
         {
             private @PlayerInputSystem m_Wrapper;
             public PlayerActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
+            public InputAction @Info => m_Wrapper.m_Player_Info;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -249,6 +272,9 @@ namespace Grail
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Info.started += instance.OnInfo;
+                @Info.performed += instance.OnInfo;
+                @Info.canceled += instance.OnInfo;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -256,6 +282,9 @@ namespace Grail
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
                 @Move.canceled -= instance.OnMove;
+                @Info.started -= instance.OnInfo;
+                @Info.performed -= instance.OnInfo;
+                @Info.canceled -= instance.OnInfo;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -321,6 +350,7 @@ namespace Grail
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnInfo(InputAction.CallbackContext context);
         }
     }
 }

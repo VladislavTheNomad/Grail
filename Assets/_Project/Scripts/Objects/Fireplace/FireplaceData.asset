@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9e043aae9a3e9478fff8d1fced9a8b, type: 3}
+  m_Name: FireplaceData
+  m_EditorClassIdentifier: 
+  <HPRecovered>k__BackingField: 50
+  <FatigueRecovered>k__BackingField: 100
+  <TurnsCost>k__BackingField: 10
+  <Info>k__BackingField: Someone left a burning fire here. You can spend time here
+    to heal and rest.

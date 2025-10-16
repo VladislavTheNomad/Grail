@@ -6,9 +6,15 @@ using Zenject;
 
 namespace Grail
 {
+    public enum MoveType
+    {
+        Forward,
+        Backward,
+    }
+
     public class PlayerController : IInitializable
     {
-        private const float DELAY_BETWEEN_TURNS = 0.3f;
+        private const float DELAY_BETWEEN_TURNS = 0.2f;
 
         private Vector3Int playerCellPosition;
         private Vector3Int previousPlayerCellPosition;
@@ -18,15 +24,19 @@ namespace Grail
         private TurnsManager turnsManager;
         private TileDataManager tileDataManager;
         private InterationsWithObjectsManager interactManager;
-        private GameObject playerObject;
+        private PlayerView playerView;
+        private UIInfoAboutEnemy uiInfoAboutEnemy;
+        private PlayerStats playerStats;
 
         [Inject]
-        public void Construct(TurnsManager tm, TileDataManager tdm, InterationsWithObjectsManager iwom, GameObject player)
+        public void Construct(TurnsManager tm, TileDataManager tdm, InterationsWithObjectsManager iwom, PlayerView player, UIInfoAboutEnemy uiiae, PlayerStats ps)
         {
             turnsManager = tm;
             tileDataManager= tdm;
             interactManager = iwom;
-            playerObject = player;
+            playerView = player;
+            uiInfoAboutEnemy = uiiae;
+            playerStats = ps;
         }
 
         public void Initialize()
@@ -34,9 +44,16 @@ namespace Grail
             inputActions = new PlayerInputSystem();
             inputActions.Enable();
             SubscribeOnMoveInput();
+            SubscribeOnInfoInput();
 
             Tilemap tilemap = tileDataManager.GetTileMap();
-            playerCellPosition = tilemap.WorldToCell(playerObject.transform.position);
+            playerCellPosition = tilemap.WorldToCell(playerView.gameObject.transform.position);
+            playerView.Setup();
+        }
+
+        public void SubscribeOnInfoInput()
+        {
+            inputActions.Player.Info.performed += OnInfoPerformed;
         }
 
         public void SubscribeOnMoveInput()
@@ -49,10 +66,42 @@ namespace Grail
             inputActions.Player.Move.performed -= OnMovePerformed;
         }
 
+        public void UnsubscribeOnInfoInput()
+        {
+            inputActions.Player.Info.performed -= OnInfoPerformed;
+        }
+
+        public Transform GetPrevoiusPosition() => playerView.transform;
+
         public void ReturnOnPreviousTile()
         {
             playerCellPosition = previousPlayerCellPosition;
-            DoMoveOnTilemap(previousPlayerCellPosition);
+            DoMoveOnTilemap(previousPlayerCellPosition, MoveType.Backward);
+        }
+
+        private void OnInfoPerformed(InputAction.CallbackContext context)
+        {
+            uiInfoAboutEnemy.SwitchActive(false);
+            uiInfoAboutEnemy.SetText("");
+       
+            Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
+            Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
+            RaycastHit2D rayHit = Physics2D.Raycast(ray.origin, ray.direction, 10f);
+            Collider2D collider = rayHit.collider;
+
+            if (collider != null)
+            {
+                if (collider.TryGetComponent<IWorldObject>(out IWorldObject infoComponent))
+                {
+
+                    string text = infoComponent.GetInfo();
+
+                    uiInfoAboutEnemy.SetText(text);
+                    Vector2 screenPos = Camera.main.WorldToScreenPoint(rayHit.collider.transform.position);
+                    uiInfoAboutEnemy.SetPosition(screenPos);
+                    uiInfoAboutEnemy.SwitchActive(true);
+                }
+            }
         }
 
         private void OnMovePerformed(InputAction.CallbackContext context)
@@ -63,6 +112,8 @@ namespace Grail
             Vector2 directionRaw = context.ReadValue<Vector2>();
             Vector2Int direction = GetMovementDirectionFromInput(directionRaw);
 
+            playerView.SetSpritePosition(directionRaw);
+
             if (direction == Vector2Int.zero) return;
 
             Vector3Int targetCellPosition = playerCellPosition + new Vector3Int(direction.x, direction.y, 0);
@@ -72,15 +123,23 @@ namespace Grail
             previousPlayerCellPosition = playerCellPosition;
             playerCellPosition = targetCellPosition;
 
-            DoMoveOnTilemap(targetCellPosition);
+            DoMoveOnTilemap(targetCellPosition, MoveType.Forward);
         }
 
-        private void DoMoveOnTilemap(Vector3Int targetPosition)
+        private void DoMoveOnTilemap(Vector3Int targetPosition, MoveType moveType)
         {
             Vector3 worldPosition = tileDataManager.GetTileWorldPosition(playerCellPosition);
-            playerObject.transform.position = worldPosition;
-            turnsManager.AddTurns(tileDataManager.CheckMoveCost(targetPosition));
-            interactManager.CheckObjectsOnTile(playerCellPosition);
+            playerView.StartCoroutine(playerView.MakeStep(worldPosition, DELAY_BETWEEN_TURNS, () =>
+            {
+                if(moveType == MoveType.Forward)
+                {
+                    turnsManager.AddTurns(1);
+                    int fatigueCost = tileDataManager.CheckFatigueCost(targetPosition);
+                    playerStats.AddStat(fatigueCost, Stats.Fatigue);
+                    interactManager.CheckObjectsOnTile(playerCellPosition);
+                }
+            }));
+            playerView.transform.position = targetPosition;
         }
 
         private Vector2Int GetMovementDirectionFromInput(Vector2 input)
@@ -101,7 +160,7 @@ namespace Grail
         private async void WaitBetweenTurns()
         {
             isInputDelayed = true;
-            await Task.Delay((int)(1000 * DELAY_BETWEEN_TURNS));
+            await Task.Delay((int)(1200 * DELAY_BETWEEN_TURNS));
             isInputDelayed = false;
         }
     }

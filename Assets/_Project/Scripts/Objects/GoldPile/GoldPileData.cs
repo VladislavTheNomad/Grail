@@ -8,5 +8,6 @@ namespace Grail
         [Header("GoldPile")]
         [field: SerializeField] public int MinGoldFromPile { get; private set; }
         [field: SerializeField] public int MaxGoldFromPile { get; private set; }
+        [field: SerializeField] public string Info { get; private set; }
     }
 }

@@ -16,11 +16,13 @@ namespace Grail
         public void StopInputSystem()
         {
             playerController.UnsubscribeOnMoveInput();
+            playerController.UnsubscribeOnInfoInput();
         }
 
         public void PlayInputSystem()
         {
             playerController.SubscribeOnMoveInput();
+            playerController.SubscribeOnInfoInput();
         }
     }
 }

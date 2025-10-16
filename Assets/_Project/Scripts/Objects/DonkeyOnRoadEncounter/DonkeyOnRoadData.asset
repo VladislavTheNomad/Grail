@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GiveGold>k__BackingField: 20
   <GetCrystals>k__BackingField: 1
-  <SpentTurnsMin>k__BackingField: 5
-  <SpentTurnsMax>k__BackingField: 10
+  <SpentFatigueMin>k__BackingField: 10
+  <SpentFatigueMax>k__BackingField: 20
