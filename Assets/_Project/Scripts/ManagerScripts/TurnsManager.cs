@@ -7,7 +7,7 @@ namespace Grail
     public class TurnsManager
     {
         private const int MAX_TURNS = 100;
-        private const int TURNS_FOR_DAYTIME_CHANGE = 30;
+        private const int TURNS_FOR_DAYTIME_CHANGE = 10;
 
         public event Action OnTurnsChanged;
         public event Action OnGameOver;

@@ -47,6 +47,15 @@ namespace Grail
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnterToTile"",
+                    ""type"": ""Button"",
+                    ""id"": ""2da7427d-9b2d-4703-bb5b-c06dd65ccb02"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -113,6 +122,17 @@ namespace Grail
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Info"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abda3309-36c0-47f1-80c8-a56ce8bcce08"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnterToTile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -186,6 +206,7 @@ namespace Grail
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Info = m_Player.FindAction("Info", throwIfNotFound: true);
+            m_Player_EnterToTile = m_Player.FindAction("EnterToTile", throwIfNotFound: true);
         }
 
         ~@PlayerInputSystem()
@@ -254,12 +275,14 @@ namespace Grail
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Info;
+        private readonly InputAction m_Player_EnterToTile;
         public struct PlayerActions
         {
             private @PlayerInputSystem m_Wrapper;
             public PlayerActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Info => m_Wrapper.m_Player_Info;
+            public InputAction @EnterToTile => m_Wrapper.m_Player_EnterToTile;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -275,6 +298,9 @@ namespace Grail
                 @Info.started += instance.OnInfo;
                 @Info.performed += instance.OnInfo;
                 @Info.canceled += instance.OnInfo;
+                @EnterToTile.started += instance.OnEnterToTile;
+                @EnterToTile.performed += instance.OnEnterToTile;
+                @EnterToTile.canceled += instance.OnEnterToTile;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -285,6 +311,9 @@ namespace Grail
                 @Info.started -= instance.OnInfo;
                 @Info.performed -= instance.OnInfo;
                 @Info.canceled -= instance.OnInfo;
+                @EnterToTile.started -= instance.OnEnterToTile;
+                @EnterToTile.performed -= instance.OnEnterToTile;
+                @EnterToTile.canceled -= instance.OnEnterToTile;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -351,6 +380,7 @@ namespace Grail
         {
             void OnMove(InputAction.CallbackContext context);
             void OnInfo(InputAction.CallbackContext context);
+            void OnEnterToTile(InputAction.CallbackContext context);
         }
     }
 }

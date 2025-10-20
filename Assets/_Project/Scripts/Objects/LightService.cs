@@ -10,6 +10,7 @@ namespace Grail
     public class LightService : MonoBehaviour, IDisposable
     {
         [SerializeField] private float animationTime = 0.65f;
+        [SerializeField] private float amplitude = 1f;
 
         private Light2D lightComp;
         private DayNightManager dayNightManager;
@@ -41,7 +42,6 @@ namespace Grail
         {
             float elapsedTime = 0f;
             float baseIntensity = lightComp.intensity;
-            float amplitude = 3f;
 
             while (gameObject.activeSelf)
             {

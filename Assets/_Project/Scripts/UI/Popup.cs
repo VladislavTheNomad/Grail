@@ -41,6 +41,10 @@ namespace Grail
                     textColor = Color.yellow;
                     offset = new Vector2(0, 0);
                     break;
+                case PopupType.Crystal:
+                    textColor = Color.blue;
+                    offset = new Vector2(0, 0);
+                    break;
                 default:
                     break;
             }

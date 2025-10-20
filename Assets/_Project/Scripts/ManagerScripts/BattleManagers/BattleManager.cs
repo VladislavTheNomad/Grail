@@ -23,7 +23,7 @@ namespace Grail
         Enemy,
     }
 
-    public class BattleManager : MonoBehaviour, IInitializable
+    public class BattleManager : IInitializable
     {
         private const int MIGHT_DAMAGE_MODIFICATOR = 2;
 
@@ -67,6 +67,15 @@ namespace Grail
             CalculateDamage(Sides.Player, out playerMinDamage, out playerMaxDamage);
             CalculateDamage(Sides.Enemy, out enemyMinDamage, out enemyMaxDamage);
             DoBattleRound();
+            DoBattleEffect(Sides.Enemy);
+        }
+
+        private void DoBattleEffect(Sides side)
+        {
+            foreach (var item in enemy.ActiveBattleEffects)
+            {
+                item.DoBattleEffect();
+            }
         }
 
         private void DoBattleRound()

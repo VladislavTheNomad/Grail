@@ -8,22 +8,18 @@ namespace Grail
         [SerializeField] private DialogueData frame;
         [SerializeField] private FireplaceData objectProperties;
 
-        private TileData thisTileData;
-        private DialogueManager dialogueManager;
         private PlayerStats playerStats;
         private TurnsManager turnsManager;
 
         [Inject]
-        public void Construct(DialogueManager dm, PlayerStats ps, PlayerInventory pi, TurnsManager tm)
+        public void Construct(PlayerStats ps, TurnsManager tm)
         {
-            dialogueManager = dm;
             playerStats = ps;
             turnsManager = tm;
         }
 
         public void ActivateObject(TileData tileData)
         {
-            thisTileData = tileData;
             dialogueManager.ShowDialogue(frame);
         }
 
@@ -41,12 +37,9 @@ namespace Grail
             playerStats.AddStat(-fatigueToSubtruct, Stats.Fatigue);
             turnsManager.AddTurns(objectProperties.TurnsCost);
 
-            CloseDialogue();
-        }
+            GetInfoToLog();
 
-        public override void CloseDialogue()
-        {
-            dialogueManager.HideDialogue();
+            CloseDialogue();
         }
     }
 }
