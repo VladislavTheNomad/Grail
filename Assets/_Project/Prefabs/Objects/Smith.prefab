@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464fd18eaece02478e05d850f0c8cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoLog: {fileID: 11400000, guid: c789cb10b656c4a40b8ba5d4aa40cdea, type: 2}
   firstFrame: {fileID: 8022295820590879777}
   rejection: {fileID: 8826496888545838283}
   objectProperties: {fileID: 11400000, guid: c675733c5c5808848b5a07062cafe5bb, type: 2}

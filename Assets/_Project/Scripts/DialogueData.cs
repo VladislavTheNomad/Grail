@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 namespace Grail
 {
@@ -16,15 +17,19 @@ namespace Grail
 
         public bool IsClosingDialoguePanel { get; private set; }
 
+        private DialogueManager dialogueManager;
+
+        [Inject]
+        public void Construct(UIManager ui, DialogueManager dm)
+        {
+            dialogueManager = dm;
+        }
+
         public void Awake()
         {
             if (buttonsTexts.Length == 1)
             {
-                IsClosingDialoguePanel = true;
-            }
-            else
-            {
-                IsClosingDialoguePanel = false;
+                SetSingleEvent(CloseDialogue);
             }
         }
 
@@ -34,6 +39,11 @@ namespace Grail
             buttonActions = new UnityEvent[1];
             buttonActions[0] = new UnityEvent();
             buttonActions[0].AddListener(unityAction);
+        }
+
+        public void CloseDialogue()
+        {
+            dialogueManager.HideDialogue();
         }
     }
 }

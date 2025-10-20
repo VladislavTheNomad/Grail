@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -20,6 +21,10 @@ namespace Grail
         [SerializeField] private TextMeshProUGUI magicDefText;
         [SerializeField] private TextMeshProUGUI fatigueText;
 
+        // info UI
+        [SerializeField] private TextMeshProUGUI infoUIText;
+
+        private List<string> infoTextLines;
         private BattleManager battleManager;
         private TurnsManager turnsManager;
         private PlayerInventory playerInventory;
@@ -32,6 +37,15 @@ namespace Grail
             turnsManager = tm;
             playerInventory = pi;
             playerStats = ps;
+
+            infoTextLines = new List<string>()
+            {
+                "",
+                "",
+                "",
+                "",
+                "",
+            };
         }
 
         private void OnDestroy()
@@ -74,6 +88,14 @@ namespace Grail
             ResourceUpdateUI(Resource.Crystals);
 
             StatsUpdateUI();
+        }
+
+        public void InfoTextAppend(string text)
+        {
+            infoTextLines.RemoveAt(0);
+            infoTextLines.Add(text);
+
+            infoUIText.text = string.Join("\n", infoTextLines);
         }
 
         private void TurnsUpdateUI()

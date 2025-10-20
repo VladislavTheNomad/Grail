@@ -1,14 +1,30 @@
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
-    public abstract class Effect : MonoBehaviour
+    public abstract class Effect : MonoBehaviour, IBattleEffect
     {
-        [SerializeField] private string info;
+        [SerializeField] protected Enemy thisEnemy;
+        [SerializeField] private InfoLogDescription descr;
 
-        public string GetInfoAboutEffect()
+        protected UIManager uiManager;
+
+        [Inject]
+        public void Construct(UIManager ui)
         {
-            return info;
+            uiManager = ui;
+        }
+
+        public virtual void DoBattleEffect()
+        {
+            GetInfoAboutEffect();
+        }
+
+        private void GetInfoAboutEffect()
+        {
+            string info = descr.GetDescription();
+            uiManager.InfoTextAppend(info);
         }
     }
 }

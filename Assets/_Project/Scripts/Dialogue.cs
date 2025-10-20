@@ -1,32 +1,31 @@
 using UnityEngine;
+using Zenject;
 
 namespace Grail
 {
     public abstract class Dialogue : MonoBehaviour
     {
-        private void Awake()
+        [SerializeField] protected InfoLogDescription infoLog;
+
+        protected UIManager uiManager;
+        protected DialogueManager dialogueManager;
+
+        [Inject]
+        public void Construct(UIManager ui, DialogueManager dm)
         {
-            AddClosingMethod();
+            uiManager = ui;
+            dialogueManager = dm;
         }
 
-        protected virtual void AddClosingMethod()
+        public virtual void CloseDialogue()
         {
-            DialogueData[] list = GetComponentsInChildren<DialogueData>();
-            DialogueData mainDialogue = GetComponentInParent<DialogueData>();
-
-            foreach (var dialogue in list)
-            {
-                if (dialogue.IsClosingDialoguePanel)
-                {
-                    dialogue.SetSingleEvent(CloseDialogue);
-                }
-            }
-            if (mainDialogue!= null && mainDialogue.IsClosingDialoguePanel)
-            {
-                mainDialogue.SetSingleEvent(CloseDialogue);
-            }
+            dialogueManager.HideDialogue();
         }
 
-        public abstract void CloseDialogue();
+        protected void GetInfoToLog()
+        {
+            string info = infoLog.GetDescription();
+            uiManager.InfoTextAppend(info);
+        }
     }
 }

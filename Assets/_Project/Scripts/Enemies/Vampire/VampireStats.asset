@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: VampireStats
   m_EditorClassIdentifier: 
   <Hp>k__BackingField: 50
-  <Might>k__BackingField: 4
+  <Might>k__BackingField: 6
   <Magic>k__BackingField: 3
-  <PhysicalDefence>k__BackingField: 0.2
+  <PhysicalDefence>k__BackingField: 0.1
   <MagicalDefence>k__BackingField: 0.1
   <Name>k__BackingField: Vampire
   <DescriptionAbout>k__BackingField: Will suck your blood!

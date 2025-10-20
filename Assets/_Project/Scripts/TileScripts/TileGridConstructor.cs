@@ -43,8 +43,11 @@ namespace Grail
             FillGridWithInteractableObjects<Crystall>(tilemap, tileGrid);
             FillGridWithInteractableObjects<Smith>(tilemap, tileGrid);
             FillGridWithInteractableObjects<Fireplace>(tilemap, tileGrid);
+            FillGridWithInteractableObjects<House>(tilemap, tileGrid);
+            FillGridWithInteractableObjects<Shipyard>(tilemap, tileGrid);
 
             //events
+            FillGridWithInteractableObjects<EmptyQuestPlace>(tilemap, tileGrid);
             FillGridWithInteractableObjects<DonkeyOnRoad>(tilemap, tileGrid);
 
             //enemies

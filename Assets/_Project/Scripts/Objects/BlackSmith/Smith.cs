@@ -10,14 +10,12 @@ namespace Grail
         [SerializeField] private SmithData objectProperties;
 
         private TileData thisTileData;
-        private DialogueManager dialogueManager;
         private PlayerStats playerStats;
         private PlayerInventory playerInventory;
 
         [Inject]
-        public void Construct(DialogueManager dm, PlayerStats ps, PlayerInventory pi)
+        public void Construct(PlayerStats ps, PlayerInventory pi)
         {
-            dialogueManager = dm;
             playerStats = ps;
             playerInventory = pi;
         }
@@ -38,12 +36,13 @@ namespace Grail
             int give = objectProperties.CostInGold;
             int take = objectProperties.MightBonus;
 
-            if (playerInventory.CurrentGold >= objectProperties.CostInGold)
+            if (playerInventory.CurrentGold >= give)
             {
-                playerInventory.AddResource(-(objectProperties.CostInGold), Resource.Gold);
-                playerStats.AddStat(objectProperties.MightBonus, Stats.Might);
+                playerInventory.AddResource(-give, Resource.Gold);
+                playerStats.AddStat(take, Stats.Might);
                 CloseDialogue();
                 thisTileData.DeactivateObject();
+                GetInfoToLog();
             }
             else if (rejection != null)
             {

@@ -20,14 +20,12 @@ namespace Grail
         [SerializeField] private DonkeyOnRoadData objectProperties;
 
         private TileData thisTileData;
-        private DialogueManager dialogueManager;
         private PlayerStats playerStats;
         private PlayerInventory playerInventory;
 
         [Inject]
-        public void Construct(PlayerStats ps, PlayerInventory pi, DialogueManager dm)
+        public void Construct(PlayerStats ps, PlayerInventory pi)
         {
-            dialogueManager = dm;
             playerStats = ps;
             playerInventory = pi;
         }
@@ -94,16 +92,6 @@ namespace Grail
                 playerInventory.AddResource(objectProperties.GetCrystals, Resource.Crystals);
                 dialogueManager.ShowDialogue(giveMoneyBrench_ResultPlus);
             }
-        }
-
-        public override void CloseDialogue()
-        {
-            dialogueManager.HideDialogue();
-        }
-
-        protected override void AddClosingMethod()
-        {
-            base.AddClosingMethod();
         }
     }
 }

@@ -45,6 +45,7 @@ namespace Grail
             inputActions.Enable();
             SubscribeOnMoveInput();
             SubscribeOnInfoInput();
+            SubscribeOnEntertoTileInput();
 
             Tilemap tilemap = tileDataManager.GetTileMap();
             playerCellPosition = tilemap.WorldToCell(playerView.gameObject.transform.position);
@@ -59,6 +60,16 @@ namespace Grail
         public void SubscribeOnMoveInput()
         {
             inputActions.Player.Move.performed += OnMovePerformed;
+        }
+
+        public void SubscribeOnEntertoTileInput()
+        {
+            inputActions.Player.EnterToTile.performed += OnEnterToTilePerformed;
+        }
+
+        public void UnSubscribeOnEntertoTileInput()
+        {
+            inputActions.Player.EnterToTile.performed -= OnEnterToTilePerformed;
         }
 
         public void UnsubscribeOnMoveInput()
@@ -77,6 +88,21 @@ namespace Grail
         {
             playerCellPosition = previousPlayerCellPosition;
             DoMoveOnTilemap(previousPlayerCellPosition, MoveType.Backward);
+        }
+
+        public void TeleportOnTilemap(Vector3Int targetPosition)
+        {
+            playerCellPosition = targetPosition;
+            Vector3 worldPosition = tileDataManager.GetTileWorldPosition(playerCellPosition);
+            playerView.StartCoroutine(playerView.MakeStep(worldPosition, 0f, () =>
+            {
+                interactManager.CheckObjectsOnTile(playerCellPosition);
+            }));
+        }
+
+        private void OnEnterToTilePerformed(InputAction.CallbackContext context)
+        {
+            interactManager.CheckObjectsOnTile(playerCellPosition);
         }
 
         private void OnInfoPerformed(InputAction.CallbackContext context)
