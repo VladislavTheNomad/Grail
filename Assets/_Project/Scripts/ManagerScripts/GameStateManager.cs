@@ -1,30 +1,21 @@
-using UnityEngine;
+using System;
 using Zenject;
 
 namespace Grail
 {
     public class GameStateManager
     {
-        private PlayerController playerController;
+        public event Action OnPause;
+        public event Action OnUnpause;
 
-        [Inject]
-        public void Construct(PlayerController pc)
+        public void PauseGame()
         {
-            playerController = pc;
+            OnPause?.Invoke();
         }
 
-        public void StopInputSystem()
+        public void UnpauseGame()
         {
-            playerController.UnsubscribeOnMoveInput();
-            playerController.UnsubscribeOnInfoInput();
-            playerController.UnSubscribeOnEntertoTileInput();
-        }
-
-        public void PlayInputSystem()
-        {
-            playerController.SubscribeOnMoveInput();
-            playerController.SubscribeOnInfoInput();
-            playerController.SubscribeOnEntertoTileInput();
+            OnUnpause?.Invoke();
         }
     }
 }

@@ -5,7 +5,6 @@ namespace Grail
 {
     public class Fireplace : Dialogue, IWorldObject
     {
-        [SerializeField] private DialogueData frame;
         [SerializeField] private FireplaceData objectProperties;
 
         private PlayerStats playerStats;
@@ -16,11 +15,6 @@ namespace Grail
         {
             playerStats = ps;
             turnsManager = tm;
-        }
-
-        public void ActivateObject(TileData tileData)
-        {
-            dialogueManager.ShowDialogue(frame);
         }
 
         public string GetInfo()

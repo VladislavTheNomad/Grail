@@ -1,0 +1,985 @@
+fileFormatVersion: 2
+guid: 90ba78e7778695a42bc6717cfc55baf5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -748404270033497249
+    second: shines_0
+  - first:
+      213: -5365628288327009483
+    second: shines_1
+  - first:
+      213: -3051111073512798044
+    second: shines_2
+  - first:
+      213: -4295409706145639229
+    second: shines_3
+  - first:
+      213: 6697165876859992088
+    second: shines_4
+  - first:
+      213: -6802928043314961891
+    second: shines_5
+  - first:
+      213: -2973107966101621953
+    second: shines_6
+  - first:
+      213: 622866554053028644
+    second: shines_7
+  - first:
+      213: -8069724001438483246
+    second: shines_8
+  - first:
+      213: 6913402487376861498
+    second: shines_9
+  - first:
+      213: 1359139063683414611
+    second: shines_10
+  - first:
+      213: 5796827564074098694
+    second: shines_11
+  - first:
+      213: 602245477034877746
+    second: shines_12
+  - first:
+      213: 3864258009988585795
+    second: shines_13
+  - first:
+      213: -6729602679939135535
+    second: shines_14
+  - first:
+      213: -2285880035320058610
+    second: shines_15
+  - first:
+      213: 4440370334339091196
+    second: shines_16
+  - first:
+      213: -612521508239148425
+    second: shines_17
+  - first:
+      213: 6347403985392964178
+    second: shines_18
+  - first:
+      213: -4984814045623353135
+    second: shines_19
+  - first:
+      213: 5069937238618052101
+    second: shines_20
+  - first:
+      213: -8192365929464095290
+    second: shines_21
+  - first:
+      213: -3233971099831061373
+    second: shines_22
+  - first:
+      213: 6035847001921273689
+    second: shines_23
+  - first:
+      213: 5356526900966728973
+    second: shines_24
+  - first:
+      213: 8625661391631342392
+    second: shines_25
+  - first:
+      213: -6291420657232446397
+    second: shines_26
+  - first:
+      213: -4801588889987827154
+    second: shines_27
+  - first:
+      213: 2640274951939978770
+    second: shines_28
+  - first:
+      213: 1475121853660127296
+    second: shines_29
+  - first:
+      213: 2710329107116821164
+    second: shines_30
+  - first:
+      213: 5873859136558917336
+    second: shines_31
+  - first:
+      213: 4084696977932644688
+    second: shines_32
+  - first:
+      213: -1831974288506882729
+    second: shines_33
+  - first:
+      213: 5801000922914840920
+    second: shines_34
+  - first:
+      213: -3142163297100617881
+    second: shines_35
+  - first:
+      213: 8424087958402088377
+    second: shines_36
+  - first:
+      213: -6148297371910874305
+    second: shines_37
+  - first:
+      213: -8988016658978013109
+    second: shines_38
+  - first:
+      213: -1603182900298147255
+    second: shines_39
+  - first:
+      213: -250194383220085008
+    second: shines_40
+  - first:
+      213: 6087927416293069910
+    second: shines_41
+  - first:
+      213: 586080356404244949
+    second: shines_42
+  - first:
+      213: -8861263148385624969
+    second: shines_43
+  - first:
+      213: 6336773420094785419
+    second: shines_44
+  - first:
+      213: -7006030451850354609
+    second: shines_45
+  - first:
+      213: -7627525328667523583
+    second: shines_46
+  - first:
+      213: 3625456106898844468
+    second: shines_47
+  - first:
+      213: -7284181895723964666
+    second: shines_48
+  - first:
+      213: 3723514577788130595
+    second: shines_49
+  - first:
+      213: 2173540658800712751
+    second: shines_50
+  - first:
+      213: 8683621467454891047
+    second: shines_51
+  - first:
+      213: -6445362233841702536
+    second: shines_52
+  - first:
+      213: 4372950310540271998
+    second: shines_53
+  - first:
+      213: -6170582923717431744
+    second: shines_54
+  - first:
+      213: -9089077366820755128
+    second: shines_55
+  - first:
+      213: -1469640967072045007
+    second: shines_56
+  - first:
+      213: 2956413691469331787
+    second: shines_57
+  - first:
+      213: -3548698497659081306
+    second: shines_58
+  - first:
+      213: -3894117814547259449
+    second: shines_59
+  - first:
+      213: -539355067028287994
+    second: shines_60
+  - first:
+      213: 4018497213862739305
+    second: shines_61
+  - first:
+      213: -5806833874320599761
+    second: shines_62
+  - first:
+      213: 1516166317098644539
+    second: shines_63
+  - first:
+      213: 6314733079531109083
+    second: shines_64
+  - first:
+      213: -2562212294688028617
+    second: shines_65
+  - first:
+      213: -6255063624533785833
+    second: shines_66
+  - first:
+      213: 7447619969447832561
+    second: shines_67
+  - first:
+      213: -8194537890094703977
+    second: shines_68
+  - first:
+      213: -3414042357158695924
+    second: shines_69
+  - first:
+      213: -1760542073463144237
+    second: shines_70
+  - first:
+      213: -7250653754488863136
+    second: shines_71
+  - first:
+      213: -4270654630390071512
+    second: shines_72
+  - first:
+      213: -8536695531540222871
+    second: shines_73
+  - first:
+      213: -7939927670051033907
+    second: shines_74
+  - first:
+      213: -1978519378551961361
+    second: shines_75
+  - first:
+      213: 2212075866813806779
+    second: shines_76
+  - first:
+      213: 6506385809701814
+    second: shines_77
+  - first:
+      213: 1925316833738404638
+    second: shines_78
+  - first:
+      213: 4207215732364622063
+    second: shines_79
+  - first:
+      213: -6779968210805993164
+    second: shines_80
+  - first:
+      213: 7766708518283009154
+    second: shines_81
+  - first:
+      213: 6364396056713303812
+    second: shines_82
+  - first:
+      213: 2126533812918510383
+    second: shines_83
+  - first:
+      213: -909076683513554050
+    second: shines_84
+  - first:
+      213: -7887093237815700042
+    second: shines_85
+  - first:
+      213: -3302216876261291922
+    second: shines_86
+  - first:
+      213: 5174248166822132874
+    second: shines_87
+  - first:
+      213: 5603751177084970147
+    second: shines_88
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Win64
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: shines_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 820
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cbb131ee03a7074ea888ace80fcc95f
+      internalID: -1037036560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_1
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 820
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a85525da131581347853f8301ee7851b
+      internalID: -696448591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_2
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 820
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 280a87d96db87004ea0c83662af574dd
+      internalID: -2004333464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_3
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 820
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 393a9be17dbbcd746a7ec2e7e343445d
+      internalID: 693824112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_4
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 820
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a35256c547eb8d4888ab9a66d7e1c24
+      internalID: -767763389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 616
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ba101102904af6468d6ebd7b402fd6b
+      internalID: 963850576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_6
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 616
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8bf4784528a47946aac323865255323
+      internalID: -236274705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_7
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 616
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b3c473a61db14940a7c1330e402784b
+      internalID: 111054278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_8
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 616
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bbe18b9351d51147ae36f16e3201301
+      internalID: -612046154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_9
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 616
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dc2f803ccac4c44f815faad21af7fec
+      internalID: 1979380214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 412
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0954fa9d0d432784cb8bc71703948038
+      internalID: -1335185860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_11
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 412
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47e2fc3f30b28934bb500e483c68f94c
+      internalID: -1870880445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_12
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 412
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef5deeb500f8b844ea2757f791d3a1af
+      internalID: 2034378265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_13
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 412
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0560fbf7845d70541a42c22427ecac5e
+      internalID: -1231401481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_14
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 412
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37e0dc49dbac0e04589979cc675cdcce
+      internalID: -623182387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 208
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62a1401b5fa3d8241afa14385455c1a2
+      internalID: 1059634723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_16
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 208
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfefb02959c43b647b784d85d42c6bc2
+      internalID: -550330553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_17
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 208
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eec3a2879a21ae742a9944d12fc1946e
+      internalID: -706963921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_18
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 208
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef54b28786f53bb489c208f93552bc26
+      internalID: 544391045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_19
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 208
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12771312b7efde64db5b796e1c1c43a5
+      internalID: 1975505350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ff6e7ec357a6e249900ff5cc335c61c
+      internalID: -1321304953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_21
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 4
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8897d3001f1311246a7a7d063b5eaa7a
+      internalID: -926681804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_22
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 4
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e235a086a4d9b249a987843bc31ea3e
+      internalID: -239933320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_23
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 4
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1afce82a8053c6446ae73f8be23ae857
+      internalID: -2126310603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shines_24
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 4
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb476d712628cf24d97044b68651a0e0
+      internalID: -283365016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 48cef1fd4ad81de45bc0e3c8215b5bdf
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      shines_0: -1037036560
+      shines_1: -696448591
+      shines_10: -1335185860
+      shines_11: -1870880445
+      shines_12: 2034378265
+      shines_13: -1231401481
+      shines_14: -623182387
+      shines_15: 1059634723
+      shines_16: -550330553
+      shines_17: -706963921
+      shines_18: 544391045
+      shines_19: 1975505350
+      shines_2: -2004333464
+      shines_20: -1321304953
+      shines_21: -926681804
+      shines_22: -239933320
+      shines_23: -2126310603
+      shines_24: -283365016
+      shines_3: 693824112
+      shines_4: -767763389
+      shines_5: 963850576
+      shines_6: -236274705
+      shines_7: 111054278
+      shines_8: -612046154
+      shines_9: 1979380214
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

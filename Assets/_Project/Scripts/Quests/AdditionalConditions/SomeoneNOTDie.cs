@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Grail
 {
-    public class SomoneNOTDie : AdditionalCondition
+    public class SomeoneNOTDie : AdditionalCondition
     {
         [SerializeField] private GameObject someoneWhoNeedsAlive;
         public override bool CheckCondition()

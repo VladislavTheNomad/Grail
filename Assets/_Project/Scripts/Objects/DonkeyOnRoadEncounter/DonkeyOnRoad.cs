@@ -8,8 +8,6 @@ namespace Grail
     {
         private const int SIDES_OF_RANDOM_DICE = 2;
 
-        [SerializeField] private DialogueData firstFrame;
-
         [SerializeField] private DialogueData helpBrenchResult_Plus;
         [SerializeField] private DialogueData helpBrenchResult_Minus;
 
@@ -19,7 +17,6 @@ namespace Grail
 
         [SerializeField] private DonkeyOnRoadData objectProperties;
 
-        private TileData thisTileData;
         private PlayerStats playerStats;
         private PlayerInventory playerInventory;
 
@@ -30,10 +27,9 @@ namespace Grail
             playerInventory = pi;
         }
 
-        public void ActivateObject(TileData tileData)
+        public override void ActivateObject(TileData tileData)
         {
-            thisTileData = tileData;
-            dialogueManager.ShowDialogue(firstFrame);
+            base.ActivateObject(tileData);
             thisTileData.DeactivateObject();
         }
 

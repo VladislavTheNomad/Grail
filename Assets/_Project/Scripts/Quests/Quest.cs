@@ -13,8 +13,9 @@ namespace Grail
 
         [SerializeField] private AdditionalCondition additionalCondition;
         [SerializeField] private Reward reward;
+        [SerializeField] private EffectAfterQuest effectAfterQuest;
 
-        protected DialogueManager dialogueManager;
+        protected DialogueUI dialogueManager;
         protected PlayerInventory playerInventory;
         protected PlayerStats playerStats;
         protected bool isFirstVisit = true;
@@ -22,7 +23,7 @@ namespace Grail
         protected bool questFailed = false;
 
         [Inject]
-        public void Construct(DialogueManager dm, PlayerInventory pi, PlayerStats ps)
+        public void Construct(DialogueUI dm, PlayerInventory pi, PlayerStats ps)
         {
             dialogueManager = dm;
             playerInventory = pi;
@@ -53,13 +54,18 @@ namespace Grail
 
             if (questFailed)
             {
-                dialogueManager.ShowDialogue(failedQuestDialogue);
+                if (failedQuestDialogue != null)
+                {
+                    dialogueManager.ShowDialogue(failedQuestDialogue);
+                    failedQuestDialogue = null;
+                }
             }
             else if (CheckQuestConditionStatus() && !questAlreadyCompleted)
             {
                 dialogueManager.ShowDialogue(questCompleteDialogue);
                 questAlreadyCompleted = true;
                 reward.GetReward();
+                effectAfterQuest.ApplyEffectAfterQuest();
             }
             else if (CheckQuestConditionStatus() && questAlreadyCompleted)
             {

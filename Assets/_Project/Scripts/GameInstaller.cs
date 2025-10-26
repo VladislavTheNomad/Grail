@@ -7,7 +7,7 @@ namespace Grail
     {
         [SerializeField] private DayNightManager dayNightManager;
         [SerializeField] private TileDataManager tileDataManager;
-        [SerializeField] private DialogueManager dialogueManager;
+        [SerializeField] private DialogueUI dialogueManager;
         [SerializeField] private UIManager uiManager;
         [SerializeField] private UIInfoAboutEnemy uiInfoAboutEnemy;
         [SerializeField] private PlayerView playerView;
@@ -32,7 +32,7 @@ namespace Grail
 
             Container.BindInterfacesAndSelfTo<DayNightManager>().FromInstance(dayNightManager).AsSingle();
             Container.BindInterfacesAndSelfTo<TileDataManager>().FromInstance(tileDataManager).AsSingle();
-            Container.BindInterfacesAndSelfTo<DialogueManager>().FromInstance(dialogueManager).AsSingle();
+            Container.BindInterfacesAndSelfTo<DialogueUI>().FromInstance(dialogueManager).AsSingle();
             Container.BindInterfacesAndSelfTo<UIInfoAboutEnemy>().FromInstance(uiInfoAboutEnemy).AsSingle();
             Container.BindInterfacesAndSelfTo<UIManager>().FromInstance(uiManager).AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerView>().FromInstance(playerView).AsSingle();

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationTime: 1
+  amplitude: 1
 --- !u!1 &8231303493802599748
 GameObject:
   m_ObjectHideFlags: 0

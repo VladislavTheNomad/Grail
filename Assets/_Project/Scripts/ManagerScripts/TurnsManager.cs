@@ -7,7 +7,6 @@ namespace Grail
     public class TurnsManager
     {
         private const int MAX_TURNS = 100;
-        private const int TURNS_FOR_DAYTIME_CHANGE = 10;
 
         public event Action OnTurnsChanged;
         public event Action OnGameOver;
@@ -39,9 +38,9 @@ namespace Grail
 
             turnsUntilDaytimeChange += addedTurns;
 
-            if(turnsUntilDaytimeChange >= TURNS_FOR_DAYTIME_CHANGE)
+            if(turnsUntilDaytimeChange >= dayNightManager.GetDaytimeTurns())
             {
-                turnsUntilDaytimeChange = TURNS_FOR_DAYTIME_CHANGE - (turnsUntilDaytimeChange - TURNS_FOR_DAYTIME_CHANGE);
+                turnsUntilDaytimeChange = dayNightManager.GetDaytimeTurns() - (turnsUntilDaytimeChange - dayNightManager.GetDaytimeTurns());
                 turnsUntilDaytimeChange = 0;
                 dayNightManager.Change();
             }

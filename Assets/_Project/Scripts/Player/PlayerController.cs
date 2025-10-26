@@ -3,16 +3,11 @@ using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using System.Threading.Tasks;
 using Zenject;
+using System;
 
 namespace Grail
 {
-    public enum MoveType
-    {
-        Forward,
-        Backward,
-    }
-
-    public class PlayerController : IInitializable
+    public class PlayerController : IInitializable, IDisposable
     {
         private const float DELAY_BETWEEN_TURNS = 0.2f;
 
@@ -27,9 +22,10 @@ namespace Grail
         private PlayerView playerView;
         private UIInfoAboutEnemy uiInfoAboutEnemy;
         private PlayerStats playerStats;
+        private GameStateManager gameStateManager;
 
         [Inject]
-        public void Construct(TurnsManager tm, TileDataManager tdm, InterationsWithObjectsManager iwom, PlayerView player, UIInfoAboutEnemy uiiae, PlayerStats ps)
+        public void Construct(TurnsManager tm, TileDataManager tdm, InterationsWithObjectsManager iwom, PlayerView player, UIInfoAboutEnemy uiiae, PlayerStats ps, GameStateManager gsm)
         {
             turnsManager = tm;
             tileDataManager= tdm;
@@ -37,6 +33,7 @@ namespace Grail
             playerView = player;
             uiInfoAboutEnemy = uiiae;
             playerStats = ps;
+            gameStateManager = gsm;
         }
 
         public void Initialize()
@@ -46,6 +43,14 @@ namespace Grail
             SubscribeOnMoveInput();
             SubscribeOnInfoInput();
             SubscribeOnEntertoTileInput();
+
+            gameStateManager.OnPause += UnSubscribeOnEntertoTileInput;
+            gameStateManager.OnPause += UnsubscribeOnMoveInput;
+            gameStateManager.OnPause += UnsubscribeOnInfoInput;
+
+            gameStateManager.OnUnpause += SubscribeOnInfoInput;
+            gameStateManager.OnUnpause += SubscribeOnMoveInput;
+            gameStateManager.OnUnpause += SubscribeOnEntertoTileInput;
 
             Tilemap tilemap = tileDataManager.GetTileMap();
             playerCellPosition = tilemap.WorldToCell(playerView.gameObject.transform.position);
@@ -188,6 +193,17 @@ namespace Grail
             isInputDelayed = true;
             await Task.Delay((int)(1200 * DELAY_BETWEEN_TURNS));
             isInputDelayed = false;
+        }
+
+        public void Dispose()
+        {
+            gameStateManager.OnPause -= UnSubscribeOnEntertoTileInput;
+            gameStateManager.OnPause -= UnsubscribeOnMoveInput;
+            gameStateManager.OnPause -= UnsubscribeOnInfoInput;
+
+            gameStateManager.OnUnpause -= SubscribeOnInfoInput;
+            gameStateManager.OnUnpause -= SubscribeOnMoveInput;
+            gameStateManager.OnUnpause -= SubscribeOnEntertoTileInput;
         }
     }
 }
