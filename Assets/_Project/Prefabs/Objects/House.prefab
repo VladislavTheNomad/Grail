@@ -306,6 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoLog: {fileID: 11400000, guid: 7e6fcd28a4f786d4495e661ae0cc9e02, type: 2}
+  firstFrame: {fileID: 0}
   quest: {fileID: 0}
   objectProperties: {fileID: 11400000, guid: 8623d9857a95bfb43bb0aae24c608065, type: 2}
 --- !u!1 &6744988998115010937

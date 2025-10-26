@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Grail
@@ -9,7 +8,7 @@ namespace Grail
 
         protected override bool CheckQuestConditionStatus()
         {
-            if(!targetEnemy.gameObject.activeSelf)
+            if(targetEnemy == null)
             {
                 return true;
             }

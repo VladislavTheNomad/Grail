@@ -6,7 +6,6 @@ namespace Grail
 {
     public class Shipyard : Dialogue, IWorldObject
     {
-        [SerializeField] private DialogueData firstFrame;
         [SerializeField] private DialogueData dialogue_Rejection;
         [SerializeField] private ShipYardData objectProperties;
 
@@ -24,11 +23,6 @@ namespace Grail
             playerController = pc;
             tileDataManager = tdm;
             turnsManager = tm;
-        }
-
-        public void ActivateObject(TileData tileData)
-        {
-            dialogueManager.ShowDialogue(firstFrame);
         }
 
         public void PayWithGold()

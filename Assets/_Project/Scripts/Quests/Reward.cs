@@ -3,13 +3,6 @@ using Zenject;
 
 namespace Grail
 {
-    public enum TypeOfReward
-    {
-        Resource,
-        Stat,
-        Info,
-    }
-
     public class Reward : MonoBehaviour
     {
         [SerializeField] private TypeOfReward type;
@@ -21,10 +14,10 @@ namespace Grail
 
         private PlayerInventory playerInventory;
         private PlayerStats playerStats;
-        private DialogueManager dialogueManager;
+        private DialogueUI dialogueManager;
 
         [Inject]
-        public void Construct(PlayerInventory pi, PlayerStats ps, DialogueManager dm)
+        public void Construct(PlayerInventory pi, PlayerStats ps, DialogueUI dm)
         {
             playerInventory = pi;
             playerStats = ps;

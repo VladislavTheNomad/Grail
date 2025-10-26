@@ -5,11 +5,9 @@ namespace Grail
 {
     public class Smith : Dialogue, IWorldObject
     {
-        [SerializeField] private DialogueData firstFrame;
         [SerializeField] private DialogueData rejection;
         [SerializeField] private SmithData objectProperties;
 
-        private TileData thisTileData;
         private PlayerStats playerStats;
         private PlayerInventory playerInventory;
 
@@ -18,12 +16,6 @@ namespace Grail
         {
             playerStats = ps;
             playerInventory = pi;
-        }
-
-        public void ActivateObject(TileData tileData)
-        {
-            thisTileData = tileData;
-            dialogueManager.ShowDialogue(firstFrame);
         }
 
         public string GetInfo()
@@ -48,11 +40,6 @@ namespace Grail
             {
                 dialogueManager.ShowDialogue(rejection);
             }
-        }
-
-        public override void CloseDialogue()
-        {
-            dialogueManager.HideDialogue();
         }
     }
 }

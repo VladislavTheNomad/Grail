@@ -3,17 +3,12 @@ using UnityEngine;
 
 namespace Grail
 {
-    public enum TimeOfDay
-    {
-        Day,
-        Night,
-    }
-
     public class DayNightManager : MonoBehaviour
     {
         public event Action<TimeOfDay> OnTimeOfDayChanged;
 
         [SerializeField] private GameObject nightFilter;
+        [SerializeField] private int DaytimeTurns;
 
         public TimeOfDay currentTimeOfDay { get; private set; }
 
@@ -21,6 +16,8 @@ namespace Grail
         {
             currentTimeOfDay = TimeOfDay.Day;
         }
+
+        public int GetDaytimeTurns() => DaytimeTurns;
 
         public void Change()
         {

@@ -17,10 +17,10 @@ namespace Grail
 
         public bool IsClosingDialoguePanel { get; private set; }
 
-        private DialogueManager dialogueManager;
+        private DialogueUI dialogueManager;
 
         [Inject]
-        public void Construct(UIManager ui, DialogueManager dm)
+        public void Construct(UIManager ui, DialogueUI dm)
         {
             dialogueManager = dm;
         }

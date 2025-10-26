@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Grail
 {
-    public class DialogueManager : MonoBehaviour
+    public class DialogueUI : MonoBehaviour
     {
         [SerializeField] private GameObject dialogueUI;
         [SerializeField] private TextMeshProUGUI descriptionText;
@@ -23,10 +23,10 @@ namespace Grail
 
         public void ShowDialogue(DialogueData dialogueData)
         {
-            gameState.StopInputSystem();
+            gameState.PauseGame();
             dialogueUI.SetActive(true);
-
             descriptionText.text = dialogueData.GetDescription();
+
             List<string> buttonsTexts = new List<string>(options.Count);
             buttonsTexts.AddRange(dialogueData.GetButtonsTexts());
             List<UnityEvent> buttonsEvents = new List<UnityEvent>(options.Count);
@@ -55,7 +55,7 @@ namespace Grail
             {
                 option.GetButton().onClick.RemoveAllListeners();
             }
-            gameState.PlayInputSystem();
+            gameState.UnpauseGame();
         }
 
         private void SetupButton(Button button, TextMeshProUGUI buttonLabel, string text, UnityEvent buttonAction)

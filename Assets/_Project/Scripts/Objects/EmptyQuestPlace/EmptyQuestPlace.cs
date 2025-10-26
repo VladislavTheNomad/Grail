@@ -6,7 +6,7 @@ namespace Grail
     {
         [SerializeField] private Quest quest;
 
-        public void ActivateObject(TileData tileData)
+        public override void ActivateObject(TileData tileData)
         {
             quest.QuestHandler();
         }

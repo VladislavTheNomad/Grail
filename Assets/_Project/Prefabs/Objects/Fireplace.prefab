@@ -382,5 +382,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoLog: {fileID: 11400000, guid: 427c6cd4dd776074db0d76b93c4ab46b, type: 2}
+  firstFrame: {fileID: 8022295820590879777}
   frame: {fileID: 8022295820590879777}
   objectProperties: {fileID: 11400000, guid: 6315a0c2232fd6c44aa6038b53f891ad, type: 2}

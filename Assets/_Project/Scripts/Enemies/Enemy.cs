@@ -4,15 +4,6 @@ using Zenject;
 
 namespace Grail
 {
-    public enum EnemyStat
-    {
-        Hp,
-        Might,
-        Magic,
-        PhysicalDefence,
-        MagicalDefence,
-    }
-
     public class Enemy : MonoBehaviour, IWorldObject
     {
         [SerializeField] private EnemyStats stats;
@@ -26,17 +17,14 @@ namespace Grail
 
         public List<IBattleEffect> ActiveBattleEffects { get; private set; }
         public TileData TileData { get; private set; }
-        public DiContainer diContainer { get; private set; }
 
-        //private BattleUI battleUI;
         private BattleManager battleManager;
 
 
         [Inject]
-        public void Construct(BattleManager bm, DiContainer container)
+        public void Construct(BattleManager bm)
         {
             battleManager = bm;
-            diContainer = container;
             SetupStats();
         }
 
@@ -48,14 +36,18 @@ namespace Grail
             Magic = stats.Magic;
             PhysicalDefence = stats.PhysicalDefence;
             MagicalDefence = stats.MagicalDefence;
+
+            ActiveBattleEffects = new List<IBattleEffect>(GetComponentsInChildren<IBattleEffect>());
         }
 
         public virtual void ActivateObject(TileData tileData) 
         {
             TileData = tileData;
-            ActiveBattleEffects = new List<IBattleEffect>(GetComponentsInChildren<IBattleEffect>());
 
-            battleManager.PrepareForBattle(this);
+            if (gameObject.activeSelf)
+            {
+                battleManager.PrepareForBattle(this);
+            }
 
             if (Hp <= 0)
             {

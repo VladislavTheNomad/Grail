@@ -6,15 +6,23 @@ namespace Grail
     public abstract class Dialogue : MonoBehaviour
     {
         [SerializeField] protected InfoLogDescription infoLog;
+        [SerializeField] protected DialogueData firstFrame;
 
         protected UIManager uiManager;
-        protected DialogueManager dialogueManager;
+        protected DialogueUI dialogueManager;
+        protected TileData thisTileData;
 
         [Inject]
-        public void Construct(UIManager ui, DialogueManager dm)
+        public void Construct(UIManager ui, DialogueUI dm)
         {
             uiManager = ui;
             dialogueManager = dm;
+        }
+
+        public virtual void ActivateObject(TileData tileData)
+        {
+            thisTileData = tileData;
+            dialogueManager.ShowDialogue(firstFrame);
         }
 
         public virtual void CloseDialogue()
